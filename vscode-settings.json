@@ -1,0 +1,17 @@
+
+{
+    "editor.fontSize": 18,
+    "editor.tabSize": 2,
+    "files.autoSave": "onFocusChange",
+    "editor.tabCompletion": true,
+    "editor.formatOnType": true,
+    "html.format.indentInnerHtml": true,
+    "html.format.endWithNewline": true,
+    "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+    "terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\cmd.exe",
+    "standard.autoFixOnSave": true,
+    "editor.accessibilitySupport": "off"
+}
