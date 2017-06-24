@@ -4,7 +4,7 @@ import axios from 'axios'
 
 class App extends Component {
   componentWillMount () {
-    /* That's what we gonna use for api requests. */
+    
     axios.get('http://ip.jsontest.com/').then(console.log)
   }
 
