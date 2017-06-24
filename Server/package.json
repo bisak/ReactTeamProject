@@ -11,7 +11,7 @@
     "blog",
     "system"
   ],
-  "author": "IK",
+  "author": "not IK",
   "license": "MIT",
   "dependencies": {
     "body-parser": "1.17.2",
