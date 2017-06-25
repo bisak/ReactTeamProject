@@ -7,7 +7,7 @@ import ProductsView from '../components/ProductsView'
 const Routes = () => (
   <Switch>
     <Route exact path='/' component={HomeComponent} />
-    <Route exact path='/ProductsView' component={ProductsView} />
+    <Route exact path='/Products' component={ProductsView} />
 
     <Route component={NotFoundPage} />
   </Switch>
