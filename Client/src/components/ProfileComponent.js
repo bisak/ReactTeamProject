@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 
 class ProfileComponent extends Component {
-    render() {
+  render () {
+    return (
+      <div>
+        <h3>user Profile</h3>
 
-        return (
-            <div>
-              <h3>user Profile</h3> 
-               
-            </div>
-        )
-    }
+      </div>
+    )
+  }
 }
 export default ProfileComponent

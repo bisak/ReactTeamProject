@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 
 class RegsiterComponent extends Component {
-    render() {
+  render () {
+    return (
+      <div>
+        <h3>register form</h3>
 
-        return (
-            <div>
-                <h3>register form</h3>
-
-            </div>
-        )
-    }
+      </div>
+    )
+  }
 }
 export default RegsiterComponent
