@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class FooterComponent extends Component {
+class NotFoundComponent extends Component {
   render () {
     return (
       <div>
@@ -10,4 +10,4 @@ class FooterComponent extends Component {
   }
 }
 
-export default FooterComponent
+export default NotFoundComponent
