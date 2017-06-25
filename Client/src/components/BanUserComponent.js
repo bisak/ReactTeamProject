@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 
 // Admin only
-class AddProductComponent extends Component {
+class BanUserComponent extends Component {
   render () {
     return (
       <div>
-        <h3>Add product form</h3>
-
+        <h3>Admin can ban users here</h3>
       </div>
     )
   }
 }
-export default AddProductComponent
+export default BanUserComponent
