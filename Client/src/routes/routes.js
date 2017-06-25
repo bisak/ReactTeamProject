@@ -12,6 +12,7 @@ import RegisterComponent from '../components/RegisterComponent'
 import AddAdminComponent from '../components/AddAdminComponent'
 import AllAdminsComponent from '../components/AllAdminsComponent'
 import BanUserComponent from '../components/BanUserComponent'
+import EditProductComponent from '../components/EditProductComponent'
 
 const Routes = () => (
   <Switch>
@@ -24,6 +25,7 @@ const Routes = () => (
 
     {/* Admin only routes */}
     <Route path='/admin/add-product' component={AddProductComponent} />
+    <Route path='/admin/edit-product' component={EditProductComponent} />
     <Route path='/admin/add-admin' component={AddAdminComponent} />
     <Route path='/admin/all-admins' component={AllAdminsComponent} />
     <Route path='/admin/ban-user' component={BanUserComponent} />
