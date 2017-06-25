@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 
-class ProductsView extends Component {
+class LoginComponent extends Component {
     render() {
 
         return (
             <div>
-              <h2>Produtcs....</h2> 
+              <h3>Login form</h3> 
                
             </div>
         )
     }
 }
-export default ProductsView
+export default LoginComponent
