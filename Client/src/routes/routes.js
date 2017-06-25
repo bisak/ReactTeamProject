@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import HomeComponent from '../components/HomeComponent'
-import NotFoundPage from '../components/NotFoundPage'
+import NotFoundComponent from '../components/NotFoundComponent'
 import ProductsView from '../components/ProductsView'
 
 const Routes = () => (
@@ -9,7 +9,7 @@ const Routes = () => (
     <Route exact path='/' component={HomeComponent} />
     <Route exact path='/ProductsView' component={ProductsView} />
 
-    <Route component={NotFoundPage} />
+    <Route component={NotFoundComponent} />
   </Switch>
 )
 
