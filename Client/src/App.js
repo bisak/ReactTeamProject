@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NavbarComponent from './components/NavbarComponent'
 import FooterComponent from './components/FooterComponent'
-import HomeComponent from './components/HomeComponent'
+import Routes from './routes/routes'
 import axios from 'axios'
 
 class App extends Component {
@@ -13,21 +13,7 @@ class App extends Component {
     return (
       <div className='App'>
         <NavbarComponent />
-        <div className='container'>
-          <HomeComponent />
-          <HomeComponent />
-          <HomeComponent />
-          <HomeComponent />
-          <HomeComponent />
-          <HomeComponent />
-          <HomeComponent />
-          <HomeComponent />
-          <HomeComponent />
-          <HomeComponent />
-          <HomeComponent />
-          <HomeComponent />
-          <HomeComponent />
-        </div>
+        <Routes />
         <FooterComponent />
       </div>
     )

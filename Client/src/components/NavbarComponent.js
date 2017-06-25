@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap'
 
 class NavbarComponent extends Component {
@@ -7,14 +8,14 @@ class NavbarComponent extends Component {
       <Navbar inverse collapseOnSelect staticTop>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href='#'>Reactive Store</a>
+            <Link to='/'>Reactive Store</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullLeft>
-            <NavItem href='#'>Link</NavItem>
-            <NavItem href='#'>Link</NavItem>
+            <NavItem>Link</NavItem>
+            <NavItem>Link</NavItem>
             <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
               <MenuItem>Action</MenuItem>
               <MenuItem>Another action</MenuItem>
