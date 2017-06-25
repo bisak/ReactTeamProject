@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import HomeComponent from '../components/HomeComponent'
-import NotFoundPage from '../components/NotFoundPage'
+import NotFoundComponent from '../components/NotFoundComponent'
 import ProductsComponent from '../components/ProductsComponent'
 import AdminAllComponent from '../components/AdminAllComponent'
 import ProfileComponnet from '../components/ProfileComponent'
@@ -20,7 +20,7 @@ const Routes = () => (
     <Route exact path='/admin/All' component={AdminAllComponent} />
     <Route exact path='/profile/:id' component={ProfileComponnet} />
     <Route exact path='/admin/addproduct' component={AddProductComponent} />
-    <Route component={NotFoundPage} />
+    <Route component={NotFoundComponent} />
   </Switch>
 )
 
