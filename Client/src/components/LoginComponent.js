@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 
 class LoginComponent extends Component {
-    render() {
+  render () {
+    return (
+      <div>
+        <h3>Login form</h3>
 
-        return (
-            <div>
-              <h3>Login form</h3> 
-               
-            </div>
-        )
-    }
+      </div>
+    )
+  }
 }
 export default LoginComponent
