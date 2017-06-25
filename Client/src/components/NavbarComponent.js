@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap'
+import { Navbar, NavDropdown, MenuItem, Nav } from 'react-bootstrap'
+import ListItemLink from './sub-components/ListItemLink'
 
 class NavbarComponent extends Component {
   render () {
@@ -14,19 +15,22 @@ class NavbarComponent extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullLeft>
-            <NavItem>Link</NavItem>
-            <NavItem>Link</NavItem>
-            <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
-              <MenuItem>Action</MenuItem>
-              <MenuItem>Another action</MenuItem>
-              <MenuItem>Something else here</MenuItem>
-              <MenuItem divider />
-              <MenuItem>Separated link</MenuItem>
-            </NavDropdown>
+            <ListItemLink to='/'>Home</ListItemLink>
+            <ListItemLink to='/products'>Components</ListItemLink>
           </Nav>
           <Nav pullRight>
-            <NavItem>Link Right</NavItem>
-            <NavItem>Link Right</NavItem>
+            <ListItemLink to='/login'>Login</ListItemLink>
+            <ListItemLink to='/register'>Register</ListItemLink>
+            <ListItemLink to='#'>Logout</ListItemLink>
+
+            <NavDropdown title='User Actions' id='basic-nav-dropdown'>
+              <ListItemLink to='/admin/add-product'>Add Component</ListItemLink>
+              <ListItemLink to='/admin/add-admin'>Add Admin</ListItemLink>
+              <ListItemLink to='/profile/all-admins'>All Admins</ListItemLink>
+              <ListItemLink to='/admin/ban-user'>Ban User</ListItemLink>
+              <MenuItem divider />
+              <ListItemLink to='/profile/someId'>Profile</ListItemLink>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
