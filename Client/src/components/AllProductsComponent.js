@@ -4,7 +4,7 @@ import ListProductComponent from './sub-components/ListProductComponent'
 class AllProductsComponent extends Component {
   render () {
     return (
-      <div>
+      <div className='container'>
         <ListProductComponent />
         <ListProductComponent />
         <ListProductComponent />

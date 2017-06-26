@@ -6,7 +6,7 @@ class BanUserComponent extends Component {
   render () {
     return (
       <div className='container'>
-        <h3 className='text-center'>Block User</h3>
+        <h3 className='text-center'>Ban User</h3>
         <ListUserComponent />
         <ListUserComponent />
         <ListUserComponent />

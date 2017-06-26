@@ -21,7 +21,7 @@ const Routes = () => (
     <Route path='/register' component={RegisterComponent} />
     <Route path='/products' component={AllProductsComponent} />
     <Route path='/product/:id' component={SingleProductComponent} />
-    <Route path='/profile/:id' component={ProfileComponnet} />
+    <Route path='/profile/:username' component={ProfileComponnet} />
 
     {/* Admin only routes */}
     <Route path='/admin/add-product' component={AddProductComponent} />

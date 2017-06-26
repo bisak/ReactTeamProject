@@ -67,7 +67,7 @@ html {
   border-radius: 3px;
   margin: 5px;
   padding: 10px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .list-user-card .username{
@@ -89,8 +89,8 @@ html {
   border: 1px solid #ddd;
   border-radius: 3px;
   margin: 5px;
-  padding: 10px;
-  overflow: auto;
+  padding: 15px 0px 10px 0 !important;
+  overflow: hidden;
 }
 
 .list-product-card .title{
@@ -99,9 +99,8 @@ html {
 }
 
 .list-product-card .description{
-  
+
 }
 
 .list-product-card .action-button{
-  margin-top: 5px;
 }
