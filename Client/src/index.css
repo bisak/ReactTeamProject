@@ -38,31 +38,31 @@ html {
   position: absolute;
 }
 
-.not-found-msg{
+.not-found-msg {
   margin-top: 25%;
   text-align: center;
 }
 
-.profile-username{
+.profile-username {
   margin: 20px 0 10px 0;
   text-align: center;
   font-size: 2rem;
 }
 
-.profile-fnln{
+.profile-fnln {
   text-align: center;
   font-size: 1.5rem;
 }
 
-.bottom-profile-section{
+.bottom-profile-section {
   margin-top: 20px;
 }
 
-.thin-grey-border{
+.thin-grey-border {
   border: 1px solid #ddd;
 }
 
-.list-user-card{
+.list-user-card {
   border: 1px solid #ddd;
   border-radius: 3px;
   margin: 5px;
@@ -70,22 +70,20 @@ html {
   overflow: hidden;
 }
 
-.list-user-card .username{
+.list-user-card .username {
   font-size: 2rem;
   margin-bottom: 5px;
 }
 
-.list-user-card .fullName{
+.list-user-card .fullName {
   font-size: 1.2rem;
 }
 
-.list-user-card .action-button{
+.list-user-card .action-button {
   margin-top: 5px;
 }
 
-
-
-.list-product-card{
+.list-product-card {
   border: 1px solid #ddd;
   border-radius: 3px;
   margin: 5px;
@@ -93,14 +91,25 @@ html {
   overflow: hidden;
 }
 
-.list-product-card .title{
+.list-product-card .title {
   font-size: 2rem;
-  margin-bottom: 5px;
+  margin: 0;
 }
 
-.list-product-card .description{
-
+.list-product-card .description {
+  margin: 0;
 }
 
-.list-product-card .action-button{
+.list-product-card .action-button {}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+textarea {
+  resize: none;
+}
+
+.bottom-profile-section{
+  margin-bottom: 20px;
 }

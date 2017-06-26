@@ -9,7 +9,7 @@ class ListProductComponent extends Component {
         <Col md={10} mdOffset={1} className='list-product-card'>
           <Col xs={12} sm={3}>
             <a href='https://image.prntscr.com/image/kz_9-9MJSIS01iKqPSY81g.png' rel='noopener noreferrer' target='_blank'>
-              <Image className='thin-grey-border' alt='Product demo image' src='https://image.prntscr.com/image/kz_9-9MJSIS01iKqPSY81g.png' responsive rounded />
+              <Image alt='Product demo image' src='https://image.prntscr.com/image/kz_9-9MJSIS01iKqPSY81g.png' responsive thumbnail />
             </a>
           </Col>
           <Col xs={12} sm={6}>
