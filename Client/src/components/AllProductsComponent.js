@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
+import ListProductComponent from './sub-components/ListProductComponent'
 
 class AllProductsComponent extends Component {
   render () {
     return (
       <div>
-        <h2>Produtcs....</h2>
-
+        <ListProductComponent />
+        <ListProductComponent />
+        <ListProductComponent />
+        <ListProductComponent />
+        <ListProductComponent />
+        <ListProductComponent />
       </div>
     )
   }
