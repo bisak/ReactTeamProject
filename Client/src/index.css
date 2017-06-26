@@ -43,6 +43,22 @@ html {
   text-align: center;
 }
 
-.white-text{
-  color: white !important;
+.profile-username{
+  margin: 20px 0 10px 0;
+  text-align: center;
+  font-size: 2rem;
 }
+
+.profile-fnln{
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.bottom-profile-section{
+  margin-top: 20px;
+}
+
+.thin-grey-border{
+  border: 1px solid #ddd;
+}
+
