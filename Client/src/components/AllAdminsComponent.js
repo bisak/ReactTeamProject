@@ -5,7 +5,7 @@ class AllAdminsComponent extends Component {
   render () {
     return (
       <div>
-        <h3>Admin can see here all admins here</h3>
+        <h3>All admins</h3>
       </div>
     )
   }

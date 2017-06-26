@@ -24,9 +24,9 @@ class NavbarComponent extends Component {
             <ListItemLink to='#'>Logout</ListItemLink>
 
             <NavDropdown title='User Actions' id='basic-nav-dropdown'>
-              <ListItemLink to='/admin/add-product'>Add Component</ListItemLink>
+              <ListItemLink to='/admin/add-product'>Add Product</ListItemLink>
               <ListItemLink to='/admin/add-admin'>Add Admin</ListItemLink>
-              <ListItemLink to='/profile/all-admins'>All Admins</ListItemLink>
+              <ListItemLink to='/admin/all-admins'>All Admins</ListItemLink>
               <ListItemLink to='/admin/ban-user'>Ban User</ListItemLink>
               <MenuItem divider />
               <ListItemLink to='/profile/someId'>Profile</ListItemLink>

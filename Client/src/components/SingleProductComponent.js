@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 
 class SingleProductComponent extends Component {
-    render() {
+  render () {
+    return (
+      <div>
+        <h2>Produtct</h2>
 
-        return (
-            <div>
-              <h2>Produtct</h2> 
-               
-            </div>
-        )
-    }
+      </div>
+    )
+  }
 }
 export default SingleProductComponent
