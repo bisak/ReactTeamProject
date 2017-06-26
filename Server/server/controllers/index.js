@@ -1,7 +1,9 @@
-const home = require('./home-controller')
+const components = require('./components-controller')
 const users = require('./users-controller')
+const admins = require('./admins-controller')
 
 module.exports = {
-  home: home,
-  users: users
+  components: components,
+  users: users,
+  admins: admins
 }

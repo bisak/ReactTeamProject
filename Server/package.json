@@ -1,17 +1,19 @@
 {
-  "name": "blog-system",
+  "name": "reactive-shop",
   "version": "0.0.1",
-  "description": "Blog System",
+  "description": "React.js components shop",
   "main": "index.js",
   "engines": {
     "node": "7.10.0",
     "npm": "4.2.0"
   },
   "keywords": [
-    "blog",
-    "system"
+    "components",
+    "shop",
+    "reactive",
+    "react"
   ],
-  "author": "not IK",
+  "author": "ReactiveShop",
   "license": "MIT",
   "dependencies": {
     "body-parser": "1.17.2",

@@ -2,12 +2,8 @@ const encryption = require('../utilities/encryption')
 const User = require('../data/User')
 
 module.exports = {
-  registerGet: (req, res) => {
-    res.render('users/register')
-  },
-  registerPost: (req, res) => {
+  register: (req, res) => {
     let reqUser = req.body
-    // Add validations!
 
     let salt = encryption.generateSalt()
     let hashedPassword = encryption.generateHashedPassword(salt, reqUser.password)
@@ -22,44 +18,38 @@ module.exports = {
       req.logIn(user, (err, user) => {
         if (err) {
           res.locals.globalError = err
-          res.render('users/register', user)
+          res.send(user)
         }
-
-        res.redirect('/')
+        res.sendStatus(200)
       })
     })
   },
-  loginGet: (req, res) => {
-    res.render('users/login')
-  },
-  loginPost: (req, res) => {
+  login: (req, res) => {
     let reqUser = req.body
     User
       .findOne({ username: reqUser.username }).then(user => {
         if (!user) {
           res.locals.globalError = 'Invalid user data'
-          res.render('users/login')
-          return
+          res.sendStatus(500)
         }
 
         if (!user.authenticate(reqUser.password)) {
           res.locals.globalError = 'Invalid user data'
-          res.render('users/login')
+          res.sendStatus(500)
           return
         }
 
         req.logIn(user, (err, user) => {
           if (err) {
             res.locals.globalError = err
-            res.render('users/login')
+            res.sendStatus(500)
           }
-
-          res.redirect('/')
+          res.sendStatus(200)
         })
       })
   },
   logout: (req, res) => {
     req.logout()
-    res.redirect('/')
+    res.sendStatus(200)
   }
 }
