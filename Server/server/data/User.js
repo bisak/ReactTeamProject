@@ -18,7 +18,7 @@ let userSchema = new mongoose.Schema({
     type: String,
     default: 'http://i.imgur.com/upiaF0M.png'
   },
-  banned: {type: Boolean, required: REQUIRED_VALIDATION_MESSAGE, default: false}
+  banned: { type: Boolean, required: REQUIRED_VALIDATION_MESSAGE, default: false }
 })
 
 let User = mongoose.model('User', userSchema)
@@ -35,7 +35,7 @@ module.exports.seedAdminUser = () => {
         email: 'admin@gmail.com',
         lastName: 'Admin',
         password: hashedPass,
-        roles: ['admin']
+        roles: ['admin', 'normal']
       })
     })
   })

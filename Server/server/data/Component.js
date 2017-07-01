@@ -4,6 +4,7 @@ const REQUIRED_VALIDATION_MESSAGE = '{PATH} is required'
 
 let componentSchema = mongoose.Schema({
   name: { type: mongoose.Schema.Types.String, required: REQUIRED_VALIDATION_MESSAGE },
+  sourcePath: { type: mongoose.Schema.Types.String, required: REQUIRED_VALIDATION_MESSAGE },
   description: { type: mongoose.Schema.Types.String },
   price: {
     type: mongoose.Schema.Types.Number,
@@ -12,11 +13,11 @@ let componentSchema = mongoose.Schema({
     default: 0,
     required: REQUIRED_VALIDATION_MESSAGE
   },
-  image: { type: mongoose.Schema.Types.String },
-  demo: { type: mongoose.Schema.Types.String, required: REQUIRED_VALIDATION_MESSAGE },
-  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review', required: REQUIRED_VALIDATION_MESSAGE }]
-  //category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: REQUIRED_VALIDATION_MESSAGE}
-})
+  imageUrl: { type: mongoose.Schema.Types.String },
+  demoUrl: { type: mongoose.Schema.Types.String, required: REQUIRED_VALIDATION_MESSAGE },
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review', required: REQUIRED_VALIDATION_MESSAGE }],
+  buyers: [{ type: mongoose.Schema.Types.String, ref: 'User', required: REQUIRED_VALIDATION_MESSAGE }]
+}, { timestamps: true })
 
 let Component = mongoose.model('Component', componentSchema)
 
