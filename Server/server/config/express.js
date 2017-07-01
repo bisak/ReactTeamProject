@@ -1,17 +1,13 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-const session = require('express-session')
 const passport = require('passport')
+const morgan = require('morgan')
 
 module.exports = (app) => {
   app.use(cookieParser())
-  app.use(bodyParser.urlencoded({ extended: true }))
-  app.use(session({
-    secret: 'neshto-taino!@#$%',
-    resave: false,
-    saveUninitialized: false
-  }))
+  app.use(bodyParser.json())
+  app.use(morgan('common'))
   app.use(passport.initialize())
   app.use(passport.session())
 

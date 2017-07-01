@@ -5,12 +5,7 @@ let rootPath = path.normalize(path.join(__dirname, '/../../'))
 module.exports = {
   development: {
     rootPath: rootPath,
-    db: 'mongodb://localhost:27017/onlineshop',
-    port: 1337
-  },
-  staging: {
-  },
-  production: {
-    port: process.env.PORT
+    db: 'mongodb://localhost:27017/ReactTeamworkDB',
+    port: 8080
   }
 }

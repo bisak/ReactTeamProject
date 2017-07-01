@@ -1,24 +1,26 @@
 const passport = require('passport')
-const LocalPassport = require('passport-local')
-const User = require('mongoose').model('User')
+const User = require('../data/User')
+
+const JwtStrategy = require('passport-jwt').Strategy
+const ExtractJwt = require('passport-jwt').ExtractJwt
+
+const opts = {
+  jwtFromRequest: ExtractJwt.fromAuthHeader(),
+  secretOrKey: 'jwt-secret-key'
+}
 
 module.exports = () => {
-  passport.use(new LocalPassport((username, password, done) => {
-    User.findOne({ username: username }).then(user => {
-      if (!user) return done(null, false)
-      if (!user.authenticate(password)) return done(null, false)
-      return done(null, user)
-    })
-  }))
-
-  passport.serializeUser((user, done) => {
-    if (user) return done(null, user._id)
+  let strategy = new JwtStrategy(opts, function (payload, done) {
+    User.findById(payload._doc._id)
+      .then((user) => {
+        if (user) return done(null, user)
+        return done(null, false)
+      })
+      .catch((error) => {
+        return done(error, false)
+      })
   })
 
-  passport.deserializeUser((id, done) => {
-    User.findById(id).then(user => {
-      if (!user) return done(null, false)
-      return done(null, user)
-    })
-  })
+  passport.use(strategy)
+  return passport
 }

@@ -1,5 +1,5 @@
-const Component = require('../models/Component')
-const Review = require('../models/Review')
+const Component = require('../data/Component')
+const Review = require('../data/Review')
 
 module.exports.getComponentById = (req, res) => {
   let id = req.params.id

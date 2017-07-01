@@ -1,21 +1,23 @@
 const controllers = require('../controllers')
-const auth = require('./auth')
+const auth = require('./auth')()
+const router = require('express').Router()
 
 module.exports = (app) => {
-  app.post('/users/register', controllers.users.register)
-  app.post('/users/login', controllers.users.login)
-  app.post('/users/logout', controllers.users.logout)
+  router.post('/users/register', controllers.users.register)
+  router.post('/users/login', controllers.users.login)
 
-  app.post('/component/add', auth.isInRole('Admin'), controllers.components.addComponent)
-  app.put('/component/edit', auth.isInRole('Admin'), controllers.components.editComponent)
-  app.post('/component/delete', auth.isInRole('Admin'), controllers.components.deleteComponent)
-  app.get('/component/:id', controllers.components.getComponentById)
-  app.post('/component/:id/buy', auth.isAuthenticated, controllers.components.buyComponent)
-  app.post('/component/:id/review', auth.isAuthenticated, controllers.components.addReview)
+  router.post('/component/add', auth.isAuthenticated('Admin'), controllers.components.addComponent)
+  router.put('/component/edit', auth.isAuthenticated('Admin'), controllers.components.editComponent)
+  router.post('/component/delete', auth.isAuthenticated('Admin'), controllers.components.deleteComponent)
+  router.get('/component/:id', controllers.components.getComponentById)
+  router.post('/component/:id/buy', auth.isAuthenticated, controllers.components.buyComponent)
+  router.post('/component/:id/review', auth.isAuthenticated, controllers.components.addReview)
 
-  app.all('*', (req, res) => {
+  router.all('*', (req, res) => {
     res.status(404)
     res.send('404 Not Found!')
     res.end()
   })
+
+  app.use('/api/', router)
 }

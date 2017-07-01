@@ -4,19 +4,21 @@ const encryption = require('../utilities/encryption')
 const REQUIRED_VALIDATION_MESSAGE = '{PATH} is required'
 
 let userSchema = new mongoose.Schema({
-  username: { type: String, required: REQUIRED_VALIDATION_MESSAGE, unique: true },
+  username: { type: String, required: REQUIRED_VALIDATION_MESSAGE, unique: true, dropDups: true },
+  email: { type: String, required: REQUIRED_VALIDATION_MESSAGE, unique: true, dropDups: true },
   firstName: { type: String, required: REQUIRED_VALIDATION_MESSAGE },
   lastName: { type: String, required: REQUIRED_VALIDATION_MESSAGE },
-  salt: String,
-  hashedPass: String,
-  roles: [String],
+  password: String,
+  roles: {
+    type: [String],
+    default: ['normal'],
+    enum: ['normal', 'admin']
+  },
+  profilePic: {
+    type: String,
+    default: 'http://i.imgur.com/upiaF0M.png'
+  },
   banned: {type: Boolean, required: REQUIRED_VALIDATION_MESSAGE, default: false}
-})
-
-userSchema.method({
-  authenticate: function (password) {
-    return encryption.generateHashedPassword(this.salt, password) === this.hashedPass
-  }
 })
 
 let User = mongoose.model('User', userSchema)
@@ -26,16 +28,15 @@ module.exports.seedAdminUser = () => {
   User.find({}).then(users => {
     if (users.length > 0) return
 
-    let salt = encryption.generateSalt()
-    let hashedPass = encryption.generateHashedPassword(salt, '123456')
-
-    User.create({
-      username: 'Admin',
-      firstName: 'Admin',
-      lastName: 'Admin',
-      salt: salt,
-      hashedPass: hashedPass,
-      roles: ['Admin']
+    encryption.generateHash('123456').then(hashedPass => {
+      User.create({
+        username: 'Admin',
+        firstName: 'Admin',
+        email: 'admin@gmail.com',
+        lastName: 'Admin',
+        password: hashedPass,
+        roles: ['admin']
+      })
     })
   })
 }

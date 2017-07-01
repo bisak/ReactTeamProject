@@ -1,55 +1,63 @@
-const encryption = require('../utilities/encryption')
+const encryptionUtil = require('../utilities/encryption')
+const validatorUtil = require('../utilities/validation')
 const User = require('../data/User')
+const jwt = require('jsonwebtoken')
 
 module.exports = {
-  register: (req, res) => {
-    let reqUser = req.body
+  register (req, res) {
+    let userToRegister = req.body
+    if (userToRegister && userToRegister.roles) delete userToRegister.roles
+    let validateInput = validatorUtil.validateRegisterInput(userToRegister)
+    if (!validateInput.isValid) {
+      return res.status(400).json({
+        success: false,
+        msg: validateInput.msg
+      })
+    }
 
-    let salt = encryption.generateSalt()
-    let hashedPassword = encryption.generateHashedPassword(salt, reqUser.password)
-
-    User.create({
-      username: reqUser.username,
-      firstName: reqUser.firstName,
-      lastName: reqUser.lastName,
-      salt: salt,
-      hashedPass: hashedPassword
-    }).then(user => {
-      req.logIn(user, (err, user) => {
-        if (err) {
-          res.locals.globalError = err
-          res.send(user)
-        }
-        res.sendStatus(200)
+    return encryptionUtil.generateHash(userToRegister.password).then((hash) => {
+      userToRegister.password = hash
+      return User.create(userToRegister).then((registeredUser) => {
+        return res.json({
+          success: true
+        })
+      })
+    }).catch((error) => {
+      console.error(error)
+      if (error.code === 11000) {
+        return res.status(409).json({
+          success: false,
+          msg: `This user already exists.`
+        })
+      }
+      return res.status(500).json({
+        success: false,
+        msg: `Unexpected error.`
       })
     })
   },
-  login: (req, res) => {
-    let reqUser = req.body
-    User
-      .findOne({ username: reqUser.username }).then(user => {
-        if (!user) {
-          res.locals.globalError = 'Invalid user data'
-          res.sendStatus(500)
-        }
+  login (req, res) {
+    const username = req.body.username
+    const password = req.body.password
 
-        if (!user.authenticate(reqUser.password)) {
-          res.locals.globalError = 'Invalid user data'
-          res.sendStatus(500)
-          return
+    User.findOne({username: username}).then((foundUser) => {
+      if (!foundUser) {
+        return res.status(400).json({ success: false, msg: 'User not found' })
+      }
+      return encryptionUtil.comparePassword(password, foundUser.password).then((isMatch) => {
+        if (isMatch) {
+          foundUser.password = undefined
+          const token = jwt.sign(foundUser, 'jwt-secret-key')
+          return res.json({
+            success: true,
+            token: 'JWT ' + token
+          })
         }
-
-        req.logIn(user, (err, user) => {
-          if (err) {
-            res.locals.globalError = err
-            res.sendStatus(500)
-          }
-          res.sendStatus(200)
-        })
+        return res.status(400).json({ success: false, msg: 'Wrong password' })
       })
-  },
-  logout: (req, res) => {
-    req.logout()
-    res.sendStatus(200)
+    }).catch((error) => {
+      console.error(error)
+      return res.status(500).json({ success: false, msg: 'Database error.', err: error })
+    })
   }
 }
