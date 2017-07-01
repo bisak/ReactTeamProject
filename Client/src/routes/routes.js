@@ -13,11 +13,13 @@ import AddAdminComponent from '../components/AddAdminComponent'
 import AllAdminsComponent from '../components/AllAdminsComponent'
 import BanUserComponent from '../components/BanUserComponent'
 import EditProductComponent from '../components/EditProductComponent'
+import LogoutComponent from '../components/LogoutComponent'
 
 const Routes = () => (
   <Switch>
     <Route exact path='/' component={HomeComponent} />
     <Route path='/login' component={LoginComponent} />
+    <Route path='/logout' component={LogoutComponent} />
     <Route path='/register' component={RegisterComponent} />
     <Route path='/products' component={AllProductsComponent} />
     <Route path='/product/:id' component={SingleProductComponent} />
