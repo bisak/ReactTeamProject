@@ -59,7 +59,7 @@ class SingleProductComponent extends Component {
                 <span className='profile-fnln'>Component Demo</span>
               </a>
             </div>
-            <hr className='single-product-hr'/>
+            <hr className='single-product-hr' />
           </Col>
         </Row>
 

@@ -138,3 +138,7 @@ textarea {
 .single-product-hr{
   margin-top: 0 !important;
 }
+
+.jumbotron{
+  margin-top: -23px !important;
+}
