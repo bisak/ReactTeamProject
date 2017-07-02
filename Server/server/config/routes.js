@@ -2,6 +2,10 @@ const controllers = require('../controllers')
 const auth = require('./auth')()
 const router = require('express').Router()
 
+const multer = require('multer')
+
+const uploader = multer({dest: 'sources/'})
+
 module.exports = (app) => {
   router.post('/users/register', controllers.users.register)
   router.post('/users/login', controllers.users.login)
@@ -9,14 +13,14 @@ module.exports = (app) => {
   router.get('/users/admins', auth.isAuthenticated('admin'), controllers.admins.getAdmins)
   router.get('/users/non-admins', auth.isAuthenticated('admin'), controllers.admins.getNonAdmins)
   router.get('/users', auth.isAuthenticated('admin'), controllers.admins.getUsers)
-  
+
   router.get('/users/:username', controllers.users.getUserById)
   router.post('/users/:username/make-admin', auth.isAuthenticated('admin'), controllers.admins.addAdmin)
   router.post('/users/:username/remove-admin', auth.isAuthenticated('admin'), controllers.admins.removeAdmin)
   router.post('/users/:username/ban', auth.isAuthenticated('admin'), controllers.admins.banUser)
   router.post('/users/:username/unban', auth.isAuthenticated('admin'), controllers.admins.unbanUser)
 
-  router.post('/component/add', auth.isAuthenticated('admin'), controllers.components.addComponent)
+  router.post('/component/add', uploader.single('sourceCode'), auth.isAuthenticated('admin'), controllers.components.addComponent)
   router.put('/component/edit', auth.isAuthenticated('admin'), controllers.components.editComponent)
   router.post('/component/delete', auth.isAuthenticated('admin'), controllers.components.deleteComponent)
   router.get('/components', controllers.components.getComponents)

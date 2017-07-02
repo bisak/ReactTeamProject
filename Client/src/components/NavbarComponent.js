@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Navbar, NavDropdown, MenuItem, Nav } from 'react-bootstrap'
+import { Navbar, NavDropdown, Nav } from 'react-bootstrap'
 import ListItemLink from './sub-components/ListItemLink'
 import Auth from '../Auth'
 
@@ -9,19 +9,20 @@ class NavbarComponent extends Component {
     let dropdown
     let registerLink
     let loginLink
-    console.log(Auth.isUserAuthenticated())
-    if (Auth.isUserAuthenticated()) {
-      console.log('here')
+    let userProfileLink
+    let logoutLink
+    if (Auth.isUserAdmin()) {
       dropdown = (
-        <NavDropdown title='User Actions' id='basic-nav-dropdown'>
+        <NavDropdown title='Admin Actions' id='basic-nav-dropdown'>
           <ListItemLink to='/admin/add-product'>Add Product</ListItemLink>
           <ListItemLink to='/admin/add-admin'>Add Admin</ListItemLink>
           <ListItemLink to='/admin/all-admins'>All Admins</ListItemLink>
           <ListItemLink to='/admin/ban-user'>Ban User</ListItemLink>
-          <MenuItem divider />
-          <ListItemLink to='/profile/someId'>Profile</ListItemLink>
-          <ListItemLink to='/logout'>Logout</ListItemLink>
         </NavDropdown>)
+    }
+    if (Auth.isUserAuthenticated()) {
+      userProfileLink = (<ListItemLink to={`/profile/${Auth.getUser().username}`}>Profile</ListItemLink>)
+      logoutLink = (<ListItemLink to='/logout'>Logout</ListItemLink>)
     } else {
       loginLink = (<ListItemLink to='/login'>Login</ListItemLink>)
       registerLink = (<ListItemLink to='/register'>Register</ListItemLink>)
@@ -43,6 +44,8 @@ class NavbarComponent extends Component {
             {loginLink}
             {registerLink}
             {dropdown}
+            {userProfileLink}
+            {logoutLink}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

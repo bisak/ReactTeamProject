@@ -17,29 +17,55 @@ module.exports.getComponentById = (req, res) => {
 }
 module.exports.getComponents = (req, res) => {
   let pageSize = 10
-  let page = parseInt(req.query.page) || 1
+  let page = Number(req.query.page) || 1
   let search = req.query.search
 
-  let query = Component.find()
+  let queryArray = []
+
+  let countQuery = Component.find()
+  let mainQuery = Component.find()
+
   if (search) {
-    query = query.where('make').regex(new RegExp(search, 'i'))
+    mainQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
+    countQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
   }
-  query
+
+  mainQuery
     .sort('-createdAt')
     .skip((page - 1) * pageSize)
     .limit(pageSize)
-    .then(components => {
-      return res.status(200).json({ success: true, data: components })
+
+  countQuery.count()
+
+  queryArray.push(mainQuery)
+  queryArray.push(countQuery)
+
+  Promise.all(queryArray)
+    .then(resolutions => {
+      let objToReturn = {}
+      objToReturn.products = resolutions[0]
+      objToReturn.pagesCount = Math.ceil(resolutions[1] / 10)
+      return res.status(200).json({ success: true, data: objToReturn })
+    })
+    .catch(error => {
+      console.log(error)
+      return res.status(500).json({success: false, msg: 'An error occured.'})
     })
 }
 module.exports.addComponent = (req, res) => {
-  let componentObj = req.body
+  let sourceCode = req.file
+  console.log(sourceCode)
+  let productData = JSON.parse(req.body.data)
+  if (!sourceCode) {
+    return res.status(400).json({ success: false, msg: 'No file supplied' })
+  }
+  productData.sourcePath = sourceCode.filename
 
-  Component.create(componentObj).then((createdComponent) => {
+  Component.create(productData).then((createdComponent) => {
     return res.status(200).json({ success: true, data: createdComponent })
   }).catch((err) => {
     console.log(err)
-    return res.status(500).json({ success: false, msg: 'Component cannot be create' })
+    return res.status(500).json({ success: false, msg: 'Component cannot be created' })
   })
 }
 module.exports.editComponent = (req, res) => {

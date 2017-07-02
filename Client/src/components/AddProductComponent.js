@@ -1,8 +1,33 @@
 import React, { Component } from 'react'
-import { ControlLabel, FormControl, FormGroup, Button, Row, Col, Form } from 'react-bootstrap'
+import {Row, Col} from 'react-bootstrap'
+import ProductForm from './sub-components/ProductForm'
+import AddProductActions from '../actions/AddProductActions'
+import AddProductStore from '../stores/AddProductStore'
 
 // Admin only
 class AddProductComponent extends Component {
+  constructor (props) {
+    super(props)
+    this.state = AddProductStore.getState()
+    this.onChange = this.onChange.bind(this)
+  }
+
+  componentDidMount () {
+    AddProductStore.listen(this.onChange)
+  }
+
+  componentWillUnmount () {
+    AddProductStore.unlisten(this.onChange)
+  }
+
+  onChange (state) {
+    this.setState(state)
+  }
+
+  handleAdd () {
+    AddProductActions.addProduct(this.state.product)
+  }
+
   render () {
     return (
       <div className='container'>
@@ -10,38 +35,7 @@ class AddProductComponent extends Component {
 
         <Row>
           <Col xs={10} sm={10} md={6} smOffset={1} xsOffset={1} mdOffset={3}>
-            <Form horizontal>
-
-              <FormGroup controlId='title-input'>
-                <ControlLabel>Title</ControlLabel>
-                <FormControl type='text' placeholder='Product title' />
-              </FormGroup>
-
-              <FormGroup controlId='description-input'>
-                <ControlLabel>Description</ControlLabel>
-                <FormControl componentClass='textarea' placeholder='Product description' />
-              </FormGroup>
-
-              <FormGroup controlId='demo-url-input'>
-                <ControlLabel>Demo URL</ControlLabel>
-                <FormControl type='url' placeholder='Demo URL' />
-              </FormGroup>
-
-              <FormGroup controlId='thumbnail-url-input'>
-                <ControlLabel>Thumbnail URL</ControlLabel>
-                <FormControl type='url' placeholder='Thumbnail URL' />
-              </FormGroup>
-
-              <FormGroup controlId='price-input'>
-                <ControlLabel>Price</ControlLabel>
-                <FormControl type='number' placeholder='Product Price' />
-              </FormGroup>
-
-              <FormGroup>
-                <Button type='submit'>Add Product</Button>
-              </FormGroup>
-
-            </Form>
+            <ProductForm product={this.state.product} onAdd={this.handleAdd.bind(this)} onInput={AddProductActions.inputChange} />
           </Col>
         </Row>
       </div>

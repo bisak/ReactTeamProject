@@ -8,16 +8,16 @@ class ListProductComponent extends Component {
       <Row>
         <Col md={10} mdOffset={1} className='list-product-card'>
           <Col xs={12} sm={3}>
-            <a href='https://image.prntscr.com/image/kz_9-9MJSIS01iKqPSY81g.png' rel='noopener noreferrer' target='_blank'>
-              <Image alt='Product demo image' src='https://image.prntscr.com/image/kz_9-9MJSIS01iKqPSY81g.png' responsive thumbnail />
+            <a href={this.props.product.imageUrl} rel='noopener noreferrer' target='_blank'>
+              <Image alt='Product demo image' src={this.props.product.imageUrl} responsive thumbnail />
             </a>
           </Col>
           <Col xs={12} sm={6}>
-            <p className='title'><Link to={'/product/someproduct'}>Google maps component for react</Link></p>
-            <p className='description'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio repellendus cum iste, impedit eum laborum consectetur omnis, necessitatibus unde quas doloribus illo, aliquam aspernatur labore vero deleniti veritatis reprehenderit animi.</p>
+            <p className='title'><Link to={`/product/${this.props.product._id}`}>{this.props.product.name}</Link></p>
+            <p className='description'>{this.props.product.description}</p>
           </Col>
           <Col xs={12} sm={3}>
-            <Button className='action-button float-right' bsStyle='success'>Buy for 15$</Button>
+            <Button className='action-button float-right' bsStyle='success'>Buy for {this.props.product.price}$</Button>
           </Col>
         </Col>
       </Row>

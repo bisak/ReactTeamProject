@@ -1,6 +1,8 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
+import PrivateRoute from './PrivateRoute'
+
 import HomeComponent from '../components/HomeComponent'
 import NotFoundComponent from '../components/NotFoundComponent'
 import AllProductsComponent from '../components/AllProductsComponent'
@@ -26,11 +28,11 @@ const Routes = () => (
     <Route path='/profile/:username' component={ProfileComponnet} />
 
     {/* Admin only routes */}
-    <Route path='/admin/add-product' component={AddProductComponent} />
-    <Route path='/admin/edit-product' component={EditProductComponent} />
-    <Route path='/admin/add-admin' component={AddAdminComponent} />
-    <Route path='/admin/all-admins' component={AllAdminsComponent} />
-    <Route path='/admin/ban-user' component={BanUserComponent} />
+    <PrivateRoute admin path='/admin/add-product' component={AddProductComponent} />
+    <PrivateRoute admin path='/admin/edit-product' component={EditProductComponent} />
+    <PrivateRoute admin path='/admin/add-admin' component={AddAdminComponent} />
+    <PrivateRoute admin path='/admin/all-admins' component={AllAdminsComponent} />
+    <PrivateRoute admin path='/admin/ban-user' component={BanUserComponent} />
 
     <Route component={NotFoundComponent} />
   </Switch>

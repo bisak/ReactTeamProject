@@ -10,7 +10,6 @@ let componentSchema = mongoose.Schema({
     type: mongoose.Schema.Types.Number,
     min: 0,
     max: Number.MAX_VALUE,
-    default: 0,
     required: REQUIRED_VALIDATION_MESSAGE
   },
   imageUrl: { type: mongoose.Schema.Types.String },
