@@ -1,7 +1,6 @@
 import alt from '../alt'
 import AllProductsActions from '../actions/AllProductsActions'
 import toastr from 'toastr'
-import history from '../history'
 
 class AllProductsStore {
   constructor () {
@@ -17,11 +16,6 @@ class AllProductsStore {
     this.products = ajaxData.data.products
     this.pagesCount = ajaxData.data.pagesCount
     this.activePage = requestPage
-    if (this.activePage === 1) {
-      history.push(`/products`)
-    } else {
-      history.push(`?page=${this.activePage}`)
-    }
   }
 
   onGetProductsError (data) {

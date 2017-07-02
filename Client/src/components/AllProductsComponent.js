@@ -12,12 +12,12 @@ class AllProductsComponent extends Component {
     super(props)
     this.state = AllProductsStore.getState()
     this.onChange = this.onChange.bind(this)
+    this.page = Number(queryString.parse(history.location.search).page) || 1
   }
 
   componentDidMount () {
     AllProductsStore.listen(this.onChange)
-    const page = Number(queryString.parse(history.location.search).page) || 1
-    AllProductsActions.getOnePageProducts(page)
+    AllProductsActions.getOnePageProducts(this.page)
   }
 
   componentWillUnmount () {
@@ -30,7 +30,10 @@ class AllProductsComponent extends Component {
   }
 
   handleSelect (page) {
-    AllProductsActions.getOnePageProducts(page)
+    if (history.location.search !== `?page=${page}`) {
+      history.push(`?page=${page}`)
+      AllProductsActions.getOnePageProducts(page)
+    }
   }
 
   render () {
