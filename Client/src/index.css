@@ -1,5 +1,4 @@
 @import '~toastr/build/toastr.css';
-
 body {
   margin: 0;
   padding: 0;
@@ -107,10 +106,35 @@ html {
   margin: 0 !important;
 }
 
+.no-padding {
+  padding: 0 !important;
+}
+
 textarea {
   resize: none;
 }
 
-.bottom-profile-section{
+.bottom-profile-section {
   margin-bottom: 20px;
+}
+
+.review {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.small-text {
+  font-size: 1rem;
+}
+
+.review-content {
+  word-wrap: break-word;
+}
+
+.review-hr{
+  margin-bottom: 10px !important;
+}
+
+.single-product-hr{
+  margin-top: 0 !important;
 }

@@ -2,6 +2,7 @@ import alt from '../alt'
 import axios from 'axios'
 import config from '../config'
 import Auth from '../Auth'
+
 class AddProductsActions {
   constructor () {
     this.generateActions(
@@ -18,7 +19,7 @@ class AddProductsActions {
     delete productToAddCopy.sourceCode
     formData.append('data', JSON.stringify(productToAddCopy))
     formData.append('sourceCode', sourceCode)
-    return axios.post(`${config.baseUrl}/component/add`, formData, {headers: {Authorization: Auth.getToken()}}).then((success) => {
+    return axios.post(`${config.baseUrl}/component/add`, formData, {headers: Auth.getAuthHeader()}).then((success) => {
       this.addProductSuccess(success)
       return true
     }).catch((error) => {

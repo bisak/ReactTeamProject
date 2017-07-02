@@ -3,15 +3,14 @@ const Review = require('../data/Review')
 
 module.exports.getComponentById = (req, res) => {
   let id = req.params.id
-  Component.findById(id).populate('reviews').lean().then(component => {
+  Component.findById(id).populate('reviews', '', null, { sort: { 'createdAt': -1 } }).lean().then(component => {
     if (!component) {
       return res.status(404).json({ success: false, msg: 'Component was not found' })
     }
     component.bought = false
-    if (req.user && component.buyers.indexOf(req.user.username) > -1) {
+    if (req.user && component.buyers.indexOf(req.user.username) !== -1) {
       component.bought = true
     }
-    console.log(component)
     return res.status(200).json({ success: true, data: component })
   })
 }
@@ -102,10 +101,7 @@ module.exports.deleteComponent = (req, res) => {
 module.exports.buyComponent = (req, res) => {
   let componentId = req.params.id
   let buyer = req.user.username
-  Component.findByIdAndUpdate(
-    componentId,
-    { $addToSet: { buyers: buyer } })
-    .then((component) => {
+  Component.findByIdAndUpdate(componentId,{ $addToSet: { buyers: buyer } }).then((component) => {
       if (!component) {
         return res.status(404).json({ success: false, msg: 'Component was not found' })
       } else if (component.buyers.indexOf(buyer) > -1) {
@@ -113,8 +109,7 @@ module.exports.buyComponent = (req, res) => {
       } else {
         return res.status(200).json({ success: true, msg: 'Component bought successfully' })
       }
-    })
-    .catch(console.log)
+    }).catch(console.log)
 }
 module.exports.addReview = (req, res) => {
   let review = req.body
@@ -126,9 +121,14 @@ module.exports.addReview = (req, res) => {
     if (!component) {
       return res.status(404).json({ success: false, msg: 'Component was not found' })
     }
-    Review.create(review)
-      .then(() => {
-        return res.status(200).json({ success: true, msg: 'Review added successfully' })
+    return Review.create(review).then((review) => {
+      component.reviews.push(review._id)
+      component.save().then(() => {
+        return res.status(200).json({ success: true, data: review, msg: 'Review added successfully' })
       })
+    })
+  }).catch(error => {
+    console.log(error)
+    return res.status(500).json({success: false, msg: 'Server Error'})
   })
 }

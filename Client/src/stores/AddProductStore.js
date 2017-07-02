@@ -16,7 +16,7 @@ class AddProductsStore {
   }
 
   onAddProductSuccess (response) {
-    // alt.recycle(this)
+    alt.recycle(this)
     toastr.options.positionClass = 'toast-bottom-right'
     toastr.success('Successfully added product.')
   }
@@ -32,9 +32,7 @@ class AddProductsStore {
     if (fieldName === 'sourceCode') {
       value = event.target.files[0]
     }
-    let product = this.product
-    product[fieldName] = value
-    this.setState({product})
+    this.product[fieldName] = value
   }
 }
 

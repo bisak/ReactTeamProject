@@ -8,9 +8,9 @@ class ListProductComponent extends Component {
       <Row>
         <Col md={10} mdOffset={1} className='list-product-card'>
           <Col xs={12} sm={3}>
-            <a href={this.props.product.imageUrl} rel='noopener noreferrer' target='_blank'>
+            <Link to={`/product/${this.props.product._id}`}>
               <Image alt='Product demo image' src={this.props.product.imageUrl} responsive thumbnail />
-            </a>
+            </Link>
           </Col>
           <Col xs={12} sm={6}>
             <p className='title'><Link to={`/product/${this.props.product._id}`}>{this.props.product.name}</Link></p>

@@ -24,7 +24,7 @@ class AddProductComponent extends Component {
     this.setState(state)
   }
 
-  handleAdd () {
+  handleAddProduct () {
     AddProductActions.addProduct(this.state.product)
   }
 
@@ -35,7 +35,7 @@ class AddProductComponent extends Component {
 
         <Row>
           <Col xs={10} sm={10} md={6} smOffset={1} xsOffset={1} mdOffset={3}>
-            <ProductForm product={this.state.product} onAdd={this.handleAdd.bind(this)} onInput={AddProductActions.inputChange} />
+            <ProductForm product={this.state.product} onAdd={this.handleAddProduct.bind(this)} onInput={AddProductActions.inputChange} />
           </Col>
         </Row>
       </div>

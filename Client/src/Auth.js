@@ -40,6 +40,13 @@ class Auth {
     }
     return {}
   }
+  static getAuthHeader () {
+    let token = this.getToken()
+    if (token) {
+      return {Authorization: token}
+    }
+    return {}
+  }
 }
 
 export default Auth
