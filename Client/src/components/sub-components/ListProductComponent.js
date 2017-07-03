@@ -19,7 +19,7 @@ class ListProductComponent extends Component {
               <Image className='list-image' alt='Product demo image' src={this.props.product.imageUrl} responsive rounded />
             </Link>
           </Col>
-          <Col xs={12} sm={5}>
+          <Col xs={12} sm={5} className='list-product-text'>
             <p className='title'><Link to={`/product/${this.props.product._id}`}>{this.props.product.name}</Link></p>
             <p className='description'>{this.props.product.description}</p>
           </Col>

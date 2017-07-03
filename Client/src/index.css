@@ -161,3 +161,7 @@ textarea {
 .for-sale-since{
   margin: 1em;
 }
+
+.list-product-text{
+  word-break: break-all;
+}

@@ -8,17 +8,23 @@ class ProductForm extends Component {
   }
 
   render () {
+    let fileInput = (<FormControl type='file' name='sourceCode' required onChange={this.props.onInput} />)
+
+    if(this.props.isEdit){
+      fileInput = (<FormControl type='file' name='sourceCode' onChange={this.props.onInput} />)
+    }
+
     return (
       <Form onSubmit={this.onFormSubmit.bind(this)} horizontal>
 
         <FormGroup controlId='title-input'>
           <ControlLabel>Name</ControlLabel>
-          <FormControl type='text' name='name' required value={this.props.product.name} onChange={this.props.onInput} placeholder='Product name' />
+          <FormControl maxLength={50} type='text' name='name' required value={this.props.product.name} onChange={this.props.onInput} placeholder='Product name' />
         </FormGroup>
 
         <FormGroup controlId='description-input'>
           <ControlLabel>Description</ControlLabel>
-          <FormControl componentClass='textarea' required name='description' value={this.props.product.description} onChange={this.props.onInput} placeholder='Product description' />
+          <FormControl maxLength={400} componentClass='textarea' required name='description' value={this.props.product.description} onChange={this.props.onInput} placeholder='Product description' />
         </FormGroup>
 
         <FormGroup controlId='demo-url-input'>
@@ -38,7 +44,7 @@ class ProductForm extends Component {
 
         <FormGroup>
           <ControlLabel>Source Code</ControlLabel>
-          <FormControl type='file' name='sourceCode' required onChange={this.props.onInput} />
+          {fileInput}
         </FormGroup>
 
         <FormGroup>
