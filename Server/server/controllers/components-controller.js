@@ -1,6 +1,6 @@
 const Component = require('../data/Component')
 const Review = require('../data/Review')
-const User = require('../data/User')
+const Statistic = require('../data/Statistic')
 
 module.exports.getComponentById = (req, res) => {
   let id = req.params.id
@@ -234,17 +234,8 @@ module.exports.addReview = (req, res) => {
 }
 
 module.exports.getHomeStats = (req, res) => {
-  let usersQuery = User.find().count()
-  let componentsQuery = Component.find().select('buyers -_id')
-  Promise.all([usersQuery, componentsQuery]).then((resolutions) => {
-    const usersCount = resolutions[0]
-    let components = resolutions[1]
-    let componentsCount = components.length
-    let purchasesCount = 0
-    components.map(component => {
-      purchasesCount += component.buyers.length
-    })
-    return res.status(200).json({ success: true, data: { componentsCount, usersCount, purchasesCount } })
+  Statistic.findOne().sort('-createdAt').then((statistic) => {
+    return res.status(200).json({ success: true, data: statistic })
   }).catch(error => {
     console.log(error)
     return res.status(500).json({ success: false, msg: 'Server Error' })

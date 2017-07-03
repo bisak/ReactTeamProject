@@ -6,6 +6,7 @@ module.exports = {
   development: {
     rootPath: rootPath,
     db: 'mongodb://localhost:27017/ReactTeamworkDB',
-    port: 8080
+    port: 8080,
+    statisticsUpdateInterval: 300000
   }
 }

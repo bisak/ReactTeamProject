@@ -31,7 +31,8 @@ module.exports = (app) => {
   router.post('/component/:id/buy', auth.isAuthenticated(), controllers.components.buyComponent)
   router.post('/component/:id/review', auth.isAuthenticated(), controllers.components.addReview)
 
-  router.get('/home/stats', controllers.components.getHomeStats)
+  router.get('/stats/home', controllers.components.getHomeStats)
+  router.get('/stats/all', auth.isAuthenticated('admin'), controllers.admins.getFullStats)
 
   router.all('*', (req, res) => {
     res.status(404)

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const User = require('../data/User')
+const Statistic = require('../data/Statistic')
 
 mongoose.Promise = global.Promise
 
@@ -15,6 +16,11 @@ module.exports = (settings) => {
     console.log('MongoDB ready!')
 
     User.seedAdminUser()
+    Statistic.updateStatistic()
+    setInterval(() => {
+      Statistic.updateStatistic()
+      console.log('updating')
+    }, settings.statisticsUpdateInterval)
   })
 
   db.on('error', err => console.log(`Database error: ${err}`))

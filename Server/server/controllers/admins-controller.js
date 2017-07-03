@@ -1,4 +1,5 @@
 const User = require('../data/User')
+const Statistic = require('../data/Statistic')
 
 module.exports.getUsers = (req, res) => {
   let pageSize = 10
@@ -96,5 +97,14 @@ module.exports.unbanUser = (req, res) => {
   }).catch((err) => {
     console.log(err)
     return res.status(500).json({ success: false, msg: 'User unbanned' })
+  })
+}
+
+module.exports.getFullStats = (req, res) => {
+  Statistic.find().sort('createdAt').then((statistics) => {
+    return res.status(200).json({ success: true, data: statistics })
+  }).catch(error => {
+    console.log(error)
+    return res.status(500).json({ success: false, msg: 'Server Error' })
   })
 }
