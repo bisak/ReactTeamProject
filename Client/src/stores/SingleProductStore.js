@@ -22,18 +22,10 @@ class SingleProductStore {
     this.showModal = false
   }
 
-  onGetSingleProductSuccess (data) {
-    let productData = data.data
+  onGetSingleProductSuccess (response) {
+    let productData = response.data
+    this.product = {...productData}
     this.product.postedAgo = moment(productData.createdAt).fromNow()
-    this.product.name = productData.name
-    this.product.description = productData.description
-    this.product.demoUrl = productData.demoUrl
-    this.product.price = productData.price
-    this.product.imageUrl = productData.imageUrl
-    this.product._id = productData._id
-    this.product.reviews = productData.reviews
-    this.product.bought = productData.bought
-    this.product.isVisible = productData.isVisible
   }
 
   onGetSingleProductError (data) {

@@ -7,6 +7,7 @@ import AllProductsActions from '../actions/AllProductsActions'
 import queryString from 'query-string'
 import history from '../history'
 import SingleProductActions from '../actions/SingleProductActions'
+import SearchForm from './sub-components/SearchForm'
 
 class AllProductsComponent extends Component {
   constructor (props) {
@@ -44,6 +45,12 @@ class AllProductsComponent extends Component {
     return (
       <div className='container'>
         <h3 className='text-center'>Our products</h3>
+        <Row>
+          <div className='center-block'>
+            <SearchForm/>
+            </div>
+        
+        </Row>
         {products}
         <Row>
           <Col xs={10} sm={8} md={6} xsOffset={1} smOffset={2} mdOffset={3}>
