@@ -14,7 +14,11 @@ class SingleProductActions {
       'buySuccess',
       'buyError',
       'handleModalClose',
-      'handleModalOpen'
+      'handleModalOpen',
+      'deleteSuccess',
+      'deleteError',
+      'unDeleteSuccess',
+      'unDeleteError'
     )
   }
 
@@ -40,10 +44,32 @@ class SingleProductActions {
 
   buyProduct (id) {
     return axios.post(`${config.baseUrl}/component/${id}/buy`, {}, {headers: Auth.getAuthHeader()}).then(response => {
-      this.buySuccess(response)
+      this.buySuccess(response.data)
       return true
     }).catch(error => {
       this.buyError(error)
+      return true
+    })
+  }
+
+  deleteProduct (id) {
+    return axios.post(`${config.baseUrl}/component/${id}/delete`, {}, {headers: Auth.getAuthHeader()}).then(response => {
+      this.deleteSuccess(response.data)
+      return true
+    }).catch(error => {
+      this.deleteError(error)
+      return true
+    })
+  }
+
+  unDeleteProduct (id) {
+    return axios.post(`${config.baseUrl}/component/${id}/un-delete`, {}, {headers: Auth.getAuthHeader()}).then(response => {
+      this.unDeleteSuccess(response.data)
+      console.log('here')
+      return true
+    }).catch(error => {
+      console.log('here2')
+      this.unDeleteError(error)
       return true
     })
   }

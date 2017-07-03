@@ -176,9 +176,8 @@ module.exports.deleteComponent = (req, res) => {
   Component.findByIdAndUpdate(componentId, { isVisible: false }).then((component) => {
     if (!component) {
       return res.status(404).json({ success: false, msg: 'Component was not found' })
-    } else {
-      return res.status(200).json({ success: true, msg: 'Component deleted successfully' })
     }
+    return res.status(200).json({ success: true, data: component, msg: 'Component deleted successfully' })
   }).catch(console.log)
 }
 
@@ -188,7 +187,7 @@ module.exports.unDeleteComponent = (req, res) => {
     if (!component) {
       return res.status(404).json({ success: false, msg: 'Component was not found' })
     } else {
-      return res.status(200).json({ success: true, msg: 'Component un-deleted successfully' })
+      return res.status(200).json({ success: true, data: component, msg: 'Component un-deleted successfully' })
     }
   }).catch(console.log)
 }

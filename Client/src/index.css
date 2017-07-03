@@ -79,6 +79,10 @@ html {
   font-size: 1.2rem;
 }
 
+.smb {
+  margin-bottom: 5px !important;
+}
+
 .list-user-card .action-button {
   margin-top: 5px;
 }
@@ -100,7 +104,9 @@ html {
   margin: 0;
 }
 
-.list-product-card .action-button {}
+.list-product-card .action-button {
+  margin-bottom: 5px !important;
+}
 
 .no-margin {
   margin: 0 !important;
@@ -158,18 +164,18 @@ textarea {
   border-bottom: 1px solid #e5e5e5 !important;
 }
 
-.for-sale-since{
+.for-sale-since {
   margin: 1em;
 }
 
-.list-product-text{
+.list-product-text {
   word-break: break-all;
 }
 
-.modal-body{
+.modal-body {
   word-break: break-all;
 }
 
-.break-word{
+.break-word {
   word-break: break-all;
 }

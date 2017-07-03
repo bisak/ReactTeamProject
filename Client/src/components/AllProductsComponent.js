@@ -6,6 +6,7 @@ import AllProductsStore from '../stores/AllProductsStore'
 import AllProductsActions from '../actions/AllProductsActions'
 import queryString from 'query-string'
 import history from '../history'
+import SingleProductActions from '../actions/SingleProductActions'
 
 class AllProductsComponent extends Component {
   constructor (props) {
@@ -38,7 +39,7 @@ class AllProductsComponent extends Component {
 
   render () {
     let products = this.state.products.map(product => {
-      return (<ListProductComponent key={product._id} product={product} />)
+      return (<ListProductComponent onDelete={SingleProductActions.deleteProduct} key={product._id} product={product} />)
     })
     return (
       <div className='container'>

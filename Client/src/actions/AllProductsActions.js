@@ -14,7 +14,6 @@ class AllProductsActions {
 
   getOnePageProducts (page) {
     return axios.get(`${config.baseUrl}/components?page=${page}`).then((response) => {
-      console.log(response.data.data)
       this.getProductsSuccess(response.data, page)
       return true
     }).catch((response) => {

@@ -15,6 +15,7 @@ class NavbarComponent extends Component {
       dropdown = (
         <NavDropdown title='Admin' id='basic-nav-dropdown'>
           <ListItemLink to='/admin/add-product'>Add Product</ListItemLink>
+          <ListItemLink to='/products/deleted'>Hidden Products</ListItemLink>
           <ListItemLink to='/admin/add-admin'>Add Admin</ListItemLink>
           <ListItemLink to='/admin/all-admins'>All Admins</ListItemLink>
           <ListItemLink to='/admin/ban-user'>Ban User</ListItemLink>
