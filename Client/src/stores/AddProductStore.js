@@ -1,10 +1,10 @@
 import alt from '../alt'
-import AddProductsActions from '../actions/AddProductActions'
+import AddProductActions from '../actions/AddProductActions'
 import toastr from 'toastr'
 
-class AddProductsStore {
+class AddProductStore {
   constructor () {
-    this.bindActions(AddProductsActions)
+    this.bindActions(AddProductActions)
     this.product = {
       name: '',
       description: '',
@@ -36,4 +36,4 @@ class AddProductsStore {
   }
 }
 
-export default alt.createStore(AddProductsStore)
+export default alt.createStore(AddProductStore)

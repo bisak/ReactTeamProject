@@ -42,6 +42,14 @@ class AllProductsComponent extends Component {
     let products = this.state.products.map(product => {
       return (<ListProductComponent onDelete={SingleProductActions.deleteProduct} key={product._id} product={product} />)
     })
+
+    if (!products.length) {
+      return (
+        <div className='container'>
+          <h3 className='text-center'>Unfortunately there are no products in our store</h3>
+        </div>
+      )
+    }
     return (
       <div className='container'>
         <h3 className='text-center'>Our products</h3>

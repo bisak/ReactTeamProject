@@ -70,6 +70,9 @@ module.exports = {
     Promise.all(promises).then((resolutions) => {
       let data = {}
       data.user = resolutions[0]
+      if (!data.user) {
+        return res.status(404).json({ success: false, msg: 'User was not found' })
+      }
       data.reviews = resolutions[1]
       return res.status(200).json({ success: true, data: data })
     })

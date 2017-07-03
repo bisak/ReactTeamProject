@@ -1,5 +1,6 @@
 import alt from '../alt'
 import ProfileActions from '../actions/ProfileActions'
+import history from '../history'
 
 class ProfileStore {
   constructor () {
@@ -22,8 +23,11 @@ class ProfileStore {
     this.reviews = data.data.reviews
   }
 
-  onGetProfileError (data) {
-    console.log(data)
+  onGetProfileError (error) {
+    if (error.response.status === 404) {
+      history.replace('/not-found')
+    }
+    console.log(error.response)
   }
 }
 
