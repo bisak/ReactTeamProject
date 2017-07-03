@@ -4,7 +4,7 @@ import { ControlLabel, FormControl, FormGroup, Button, Form } from 'react-bootst
 class ProductForm extends Component {
   onFormSubmit (event) {
     event.preventDefault()
-    this.props.onAdd(this.props.product)
+    this.props.onAdd()
   }
 
   render () {

@@ -20,19 +20,19 @@ import LogoutComponent from '../components/LogoutComponent'
 const Routes = () => (
   <Switch>
     <Route exact path='/' component={HomeComponent} />
-    <Route path='/login' component={LoginComponent} />
-    <Route path='/logout' component={LogoutComponent} />
-    <Route path='/register' component={RegisterComponent} />
-    <Route path='/products' component={AllProductsComponent} />
-    <Route path='/product/:id' component={SingleProductComponent} />
-    <Route path='/profile/:username' component={ProfileComponnet} />
+    <Route exact path='/login' component={LoginComponent} />
+    <Route exact path='/logout' component={LogoutComponent} />
+    <Route exact path='/register' component={RegisterComponent} />
+    <Route exact path='/products' component={AllProductsComponent} />
+    <Route exact path='/product/:id' component={SingleProductComponent} />
+    <Route exact path='/profile/:username' component={ProfileComponnet} />
 
     {/* Admin only routes */}
-    <PrivateRoute admin path='/admin/add-product' component={AddProductComponent} />
-    <PrivateRoute admin path='/admin/edit-product' component={EditProductComponent} />
-    <PrivateRoute admin path='/admin/add-admin' component={AddAdminComponent} />
-    <PrivateRoute admin path='/admin/all-admins' component={AllAdminsComponent} />
-    <PrivateRoute admin path='/admin/ban-user' component={BanUserComponent} />
+    <PrivateRoute admin exact path='/admin/add-product' component={AddProductComponent} />
+    <PrivateRoute admin exact path='/admin/edit-product' component={EditProductComponent} />
+    <PrivateRoute admin exact path='/admin/add-admin' component={AddAdminComponent} />
+    <PrivateRoute admin exact path='/admin/all-admins' component={AllAdminsComponent} />
+    <PrivateRoute admin exact path='/admin/ban-user' component={BanUserComponent} />
 
     <Route component={NotFoundComponent} />
   </Switch>

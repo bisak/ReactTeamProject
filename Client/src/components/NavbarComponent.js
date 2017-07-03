@@ -13,7 +13,7 @@ class NavbarComponent extends Component {
     let logoutLink
     if (Auth.isUserAdmin()) {
       dropdown = (
-        <NavDropdown title='Admin Actions' id='basic-nav-dropdown'>
+        <NavDropdown title='Admin' id='basic-nav-dropdown'>
           <ListItemLink to='/admin/add-product'>Add Product</ListItemLink>
           <ListItemLink to='/admin/add-admin'>Add Admin</ListItemLink>
           <ListItemLink to='/admin/all-admins'>All Admins</ListItemLink>
@@ -21,7 +21,11 @@ class NavbarComponent extends Component {
         </NavDropdown>)
     }
     if (Auth.isUserAuthenticated()) {
-      userProfileLink = (<ListItemLink to={`/profile/${Auth.getUser().username}`}>Profile</ListItemLink>)
+      userProfileLink = (
+        <NavDropdown title='User' id='basic-nav-dropdown'>
+          <ListItemLink to={`/profile/${Auth.getUser().username}`}>Profile</ListItemLink>
+          <ListItemLink to='/products/bought'>My purchases</ListItemLink>
+        </NavDropdown>)
       logoutLink = (<ListItemLink to='/logout'>Logout</ListItemLink>)
     } else {
       loginLink = (<ListItemLink to='/login'>Login</ListItemLink>)

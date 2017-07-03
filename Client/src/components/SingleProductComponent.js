@@ -5,6 +5,7 @@ import SingleProductStore from '../stores/SingleProductStore'
 import alt from '../alt'
 import ReviewForm from './sub-components/ReviewForm'
 import Review from './sub-components/Review'
+import ConfirmPurchaseModal from './sub-components/ConfirmPurchaseModal'
 
 class SingleProductComponent extends Component {
   constructor (props) {
@@ -32,17 +33,32 @@ class SingleProductComponent extends Component {
     SingleProductActions.addReview(this.state.review, this.state.product._id)
   }
 
+  handleBuy () {
+    SingleProductActions.buyProduct(this.state.product._id)
+  }
+
   render () {
     let reviews = this.state.product.reviews.map(review => {
       return (
         <Review key={review._id} {...review} />
       )
     })
+
+    let noReviewsMessage
+
+    if (!reviews.length) {
+      noReviewsMessage = <h5 className='text-center'>No reviews for this component. Add the first one.</h5>
+    }
+
+    let actionButton = (<Button className='action-button center-block' onClick={SingleProductActions.handleModalOpen} bsStyle='success'>Buy for ${this.state.product.price}</Button>)
+    if (this.state.product.bought) {
+      actionButton = (<Button className='action-button center-block' bsStyle='success'>Download Source</Button>)
+    }
     return (
       <div className='container'>
         <Row><h4 className='text-center'>{this.state.product.name}</h4></Row>
-        <Row><Button className='action-button center-block' bsStyle='success'>Buy for {this.state.product.price}$</Button></Row>
-        <Row className='text-center'><span>For sale since {this.state.product.postedAgo}.</span></Row>
+        <Row>{actionButton}</Row>
+        <Row className='text-center'><p className='for-sale-since'>For sale since {this.state.product.postedAgo}.</p></Row>
         <Row>
           <Col xs={12} sm={10} smOffset={1}>
             <a href={this.state.product.imageUrl} rel='noopener noreferrer' target='_blank'>
@@ -55,11 +71,11 @@ class SingleProductComponent extends Component {
             <div className='text-center'>
               <br />
               <p className='profile-fnln'>{this.state.product.description}</p>
-              <a href={this.state.product.demoUrl} rel='noopener noreferrer' target='_blank'>
-                <span className='profile-fnln'>Component Demo</span>
+              <a className='btn btn-default btn-sm' role='button' href={this.state.product.demoUrl} rel='noopener noreferrer' target='_blank'>
+                Component Demo
               </a>
             </div>
-            <hr className='single-product-hr' />
+            <hr />
           </Col>
         </Row>
 
@@ -74,8 +90,11 @@ class SingleProductComponent extends Component {
             <h4 className='text-center'>Reviews</h4>
             <hr />
             {reviews}
+            {noReviewsMessage}
           </Col>
         </Row>
+
+        <ConfirmPurchaseModal buy={this.handleBuy.bind(this)} product={this.state.product} showModal={this.state.showModal} close={SingleProductActions.handleModalClose} />
       </div>
     )
   }

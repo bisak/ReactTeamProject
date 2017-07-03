@@ -34,8 +34,10 @@ class ProfileComponent extends Component {
         <Review key={review._id} {...review} />
       )
     })
+
+    let noReviewsMessage
     if (!reviews.length) {
-      reviews = <h5 className='text-center'>No reviews by this user</h5>
+      noReviewsMessage = <h5 className='text-center'>No reviews by this user</h5>
     }
     return (
       <div className='container'>
@@ -48,11 +50,13 @@ class ProfileComponent extends Component {
           <p className='profile-username'>{this.state.user.username}</p>
           <p className='profile-fnln'>{this.state.user.firstName} {this.state.user.lastName}</p>
         </Row>
+        <hr className='no-margin no-padding' />
         <Row className='bottom-profile-section'>
           <Col className='thin-grey-border' xs={10} xsOffset={1}>
             <h4 className='text-center'>Reviews</h4>
             <hr />
             {reviews}
+            {noReviewsMessage}
           </Col>
         </Row>
       </div>

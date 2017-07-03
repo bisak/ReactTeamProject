@@ -1,6 +1,7 @@
 import alt from '../alt'
 import SingleProductActions from '../actions/SingleProductActions'
 import moment from 'moment'
+import toastr from 'toastr'
 
 class SingleProductStore {
   constructor () {
@@ -13,9 +14,11 @@ class SingleProductStore {
       price: '',
       postedAgo: '',
       _id: '',
-      reviews: []
+      reviews: [],
+      bought: false
     }
     this.review = ''
+    this.showModal = false
   }
 
   onGetSingleProductSuccess (data) {
@@ -28,6 +31,7 @@ class SingleProductStore {
     this.product.imageUrl = productData.imageUrl
     this.product._id = productData._id
     this.product.reviews = productData.reviews
+    this.product.bought = productData.bought
   }
 
   onGetSingleProductError (data) {
@@ -49,6 +53,25 @@ class SingleProductStore {
 
   onAddReviewError (data) {
 
+  }
+
+  onBuySuccess (response) {
+    toastr.options.positionClass = 'toast-bottom-right'
+    toastr.success('You can download the source code now.', 'Product bought successfully')
+    this.showModal = false
+    this.product.bought = true
+  }
+
+  onBuyError (response) {
+    console.log(response.response)
+  }
+
+  onHandleModalClose () {
+    this.showModal = false
+  }
+
+  onHandleModalOpen () {
+    this.showModal = true
   }
 }
 

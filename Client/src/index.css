@@ -131,14 +131,33 @@ textarea {
   word-wrap: break-word;
 }
 
-.review-hr{
+.review-hr {
   margin-bottom: 10px !important;
 }
 
-.single-product-hr{
+.single-product-hr {
   margin-top: 0 !important;
 }
 
-.jumbotron{
+.jumbotron {
   margin-top: -23px !important;
+}
+
+@media (min-width: 768px) {
+  .image-container {
+    max-height: 200px;
+    overflow: hidden;
+  }
+}
+
+.list-image {
+  width: 100%;
+}
+
+.modal-header {
+  border-bottom: 1px solid #e5e5e5 !important;
+}
+
+.for-sale-since{
+  margin: 1em;
 }

@@ -10,7 +10,11 @@ class SingleProductActions {
       'getSingleProductError',
       'addReviewSuccess',
       'addReviewError',
-      'inputChange'
+      'inputChange',
+      'buySuccess',
+      'buyError',
+      'handleModalClose',
+      'handleModalOpen'
     )
   }
 
@@ -30,6 +34,16 @@ class SingleProductActions {
       return true
     }).catch(error => {
       this.addReviewError(error)
+      return true
+    })
+  }
+
+  buyProduct (id) {
+    return axios.post(`${config.baseUrl}/component/${id}/buy`, {}, {headers: Auth.getAuthHeader()}).then(response => {
+      this.buySuccess(response)
+      return true
+    }).catch(error => {
+      this.buyError(error)
       return true
     })
   }
