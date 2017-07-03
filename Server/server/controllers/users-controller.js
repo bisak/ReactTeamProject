@@ -1,7 +1,6 @@
 const encryptionUtil = require('../utilities/encryption')
 const validatorUtil = require('../utilities/validation')
 const User = require('../data/User')
-const Component = require('../data/Component')
 const Review = require('../data/Review')
 const jwt = require('jsonwebtoken')
 

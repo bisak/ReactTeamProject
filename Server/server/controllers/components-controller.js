@@ -22,8 +22,8 @@ module.exports.getComponents = (req, res) => {
 
   let queryArray = []
 
-  let countQuery = Component.find()
-  let mainQuery = Component.find()
+  let countQuery = Component.where({ isVisible: true }).find()
+  let mainQuery = Component.where({ isVisible: true }).find()
 
   if (search) {
     mainQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
@@ -49,7 +49,83 @@ module.exports.getComponents = (req, res) => {
     })
     .catch(error => {
       console.log(error)
-      return res.status(500).json({success: false, msg: 'An error occured.'})
+      return res.status(500).json({ success: false, msg: 'An error occured.' })
+    })
+}
+module.exports.getBoughtComponents = (req, res) => {
+  let username = req.user.username
+  let pageSize = 10
+  let page = Number(req.query.page) || 1
+  let search = req.query.search
+
+  let queryArray = []
+
+  let countQuery = Component.where({ buyers: username }).find()
+  let mainQuery = Component.where({ buyers: username }).find()
+
+  if (search) {
+    mainQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
+    countQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
+  }
+
+  mainQuery
+    .sort('-createdAt')
+    .skip((page - 1) * pageSize)
+    .limit(pageSize)
+
+  countQuery.count()
+
+  queryArray.push(mainQuery)
+  queryArray.push(countQuery)
+
+  Promise.all(queryArray)
+    .then(resolutions => {
+      let objToReturn = {}
+      objToReturn.products = resolutions[0]
+      objToReturn.pagesCount = Math.ceil(resolutions[1] / 10)
+      return res.status(200).json({ success: true, data: objToReturn })
+    })
+    .catch(error => {
+      console.log(error)
+      return res.status(500).json({ success: false, msg: 'An error occured.' })
+    })
+}
+
+module.exports.getDeletedComponents = (req, res) => {
+  let pageSize = 10
+  let page = Number(req.query.page) || 1
+  let search = req.query.search
+
+  let queryArray = []
+
+  let countQuery = Component.where({ isVisible: false }).find()
+  let mainQuery = Component.where({ isVisible: false }).find()
+
+  if (search) {
+    mainQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
+    countQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
+  }
+
+  mainQuery
+    .sort('-createdAt')
+    .skip((page - 1) * pageSize)
+    .limit(pageSize)
+
+  countQuery.count()
+
+  queryArray.push(mainQuery)
+  queryArray.push(countQuery)
+
+  Promise.all(queryArray)
+    .then(resolutions => {
+      let objToReturn = {}
+      objToReturn.products = resolutions[0]
+      objToReturn.pagesCount = Math.ceil(resolutions[1] / 10)
+      return res.status(200).json({ success: true, data: objToReturn })
+    })
+    .catch(error => {
+      console.log(error)
+      return res.status(500).json({ success: false, msg: 'An error occured.' })
     })
 }
 module.exports.addComponent = (req, res) => {
@@ -92,18 +168,30 @@ module.exports.editComponent = (req, res) => {
   })
 }
 module.exports.deleteComponent = (req, res) => {
-  let id = req.params.id
-  Component.findByIdAndRemove(id).then((removedComponent) => {
-    Review.remove({ component: removedComponent._id }).then(() => {
-      return res.status(200).json({ success: true })
-    })
-  })
+  let componentId = req.params.id
+  Component.findByIdAndUpdate(componentId, { isVisible: false }).then((component) => {
+    if (!component) {
+      return res.status(404).json({ success: false, msg: 'Component was not found' })
+    } else {
+      return res.status(200).json({ success: true, msg: 'Component deleted successfully' })
+    }
+  }).catch(console.log)
+}
+module.exports.unDeleteComponent = (req, res) => {
+  let componentId = req.params.id
+  Component.findByIdAndUpdate(componentId, { isVisible: true }).then((component) => {
+    if (!component) {
+      return res.status(404).json({ success: false, msg: 'Component was not found' })
+    } else {
+      return res.status(200).json({ success: true, msg: 'Component un-deleted successfully' })
+    }
+  }).catch(console.log)
 }
 module.exports.buyComponent = (req, res) => {
   let componentId = req.params.id
   let buyer = req.user.username
   Component.findByIdAndUpdate(componentId, { $addToSet: { buyers: buyer } }).then((component) => {
-    if (!component) {
+    if (!component || !component.isVisible) {
       return res.status(404).json({ success: false, msg: 'Component was not found' })
     } else if (component.buyers.indexOf(buyer) > -1) {
       return res.status(400).json({ success: false, msg: 'Component is already bought' })
@@ -113,9 +201,13 @@ module.exports.buyComponent = (req, res) => {
   }).catch(console.log)
 }
 module.exports.addReview = (req, res) => {
+  if (req.user.banned) {
+    return res.status(400).json({ success: false, msg: 'You cannot add reviews' })
+  }
   let review = req.body
   let componentId = req.params.id
   review.creator = req.user.username
+  console.log(req.user)
   review.component = componentId
 
   Component.findById(componentId).then((component) => {
@@ -130,7 +222,7 @@ module.exports.addReview = (req, res) => {
     })
   }).catch(error => {
     console.log(error)
-    return res.status(500).json({success: false, msg: 'Server Error'})
+    return res.status(500).json({ success: false, msg: 'Server Error' })
   })
 }
 
@@ -145,9 +237,9 @@ module.exports.getHomeStats = (req, res) => {
     components.map(component => {
       purchasesCount += component.buyers.length
     })
-    return res.status(200).json({success: true, data: {componentsCount, usersCount, purchasesCount}})
+    return res.status(200).json({ success: true, data: { componentsCount, usersCount, purchasesCount } })
   }).catch(error => {
     console.log(error)
-    return res.status(500).json({success: false, msg: 'Server Error'})
+    return res.status(500).json({ success: false, msg: 'Server Error' })
   })
 }
