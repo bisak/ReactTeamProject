@@ -28,6 +28,12 @@ class ListProductComponent extends Component {
         unDeletePostBtn = (<Button onClick={this.handleUnDelete.bind(this)} className='action-button center-block' bsStyle='success'>Show</Button>)
       }
     }
+
+    if(this.props.hideAllControls){
+      deletePostBtn = null
+      unDeletePostBtn = null
+    }
+
     return (
       <Row>
         <Col md={10} mdOffset={1} className='list-product-card'>

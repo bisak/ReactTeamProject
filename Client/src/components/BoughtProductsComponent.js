@@ -39,7 +39,7 @@ class BoughtProductsComponent extends Component {
 
   render () {
     let products = this.state.products.map(product => {
-      return (<ListProductComponent key={product._id} product={product} />)
+      return (<ListProductComponent hideAllControls key={product._id} product={product} />)
     })
 
     if (!products.length) {
