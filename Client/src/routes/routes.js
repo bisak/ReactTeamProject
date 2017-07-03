@@ -16,6 +16,8 @@ import AllAdminsComponent from '../components/AllAdminsComponent'
 import BanUserComponent from '../components/BanUserComponent'
 import EditProductComponent from '../components/EditProductComponent'
 import LogoutComponent from '../components/LogoutComponent'
+import BoughtProductsComponent from '../components/BoughtProductsComponent'
+import RemovedProductsComponent from '../components/RemovedProductsComponent'
 
 const Routes = () => (
   <Switch>
@@ -27,7 +29,10 @@ const Routes = () => (
     <Route exact path='/product/:id' component={SingleProductComponent} />
     <Route exact path='/profile/:username' component={ProfileComponnet} />
 
+    <PrivateRoute exact path='/products/bought' component={BoughtProductsComponent} />
+
     {/* Admin only routes */}
+    <PrivateRoute admin exact path='/products/deleted' component={RemovedProductsComponent} />
     <PrivateRoute admin exact path='/admin/add-product' component={AddProductComponent} />
     <PrivateRoute admin exact path='/admin/edit-product' component={EditProductComponent} />
     <PrivateRoute admin exact path='/admin/add-admin' component={AddAdminComponent} />

@@ -165,3 +165,11 @@ textarea {
 .list-product-text{
   word-break: break-all;
 }
+
+.modal-body{
+  word-break: break-all;
+}
+
+.break-word{
+  word-break: break-all;
+}

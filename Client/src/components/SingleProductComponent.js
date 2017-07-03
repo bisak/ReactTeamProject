@@ -68,7 +68,7 @@ class SingleProductComponent extends Component {
         </Row>
         <Row>
           <Col xs={12} sm={10} smOffset={1}>
-            <div className='text-center'>
+            <div className='text-center break-word'>
               <br />
               <p className='profile-fnln'>{this.state.product.description}</p>
               <a className='btn btn-default btn-sm' role='button' href={this.state.product.demoUrl} rel='noopener noreferrer' target='_blank'>

@@ -7,7 +7,7 @@ import AllProductsActions from '../actions/AllProductsActions'
 import queryString from 'query-string'
 import history from '../history'
 
-class AllProductsComponent extends Component {
+class BoughtProductsComponent extends Component {
   constructor (props) {
     super(props)
     this.state = AllProductsStore.getState()
@@ -17,7 +17,7 @@ class AllProductsComponent extends Component {
 
   componentDidMount () {
     AllProductsStore.listen(this.onChange)
-    AllProductsActions.getOnePageProducts(this.page)
+    AllProductsActions.getOnePageBoughtProducts(this.page)
   }
 
   componentWillUnmount () {
@@ -32,7 +32,7 @@ class AllProductsComponent extends Component {
   handleSelect (page) {
     if (history.location.search !== `?page=${page}`) {
       history.push(`?page=${page}`)
-      AllProductsActions.getOnePageProducts(page)
+      AllProductsActions.getOnePageBoughtProducts(page)
     }
   }
 
@@ -42,7 +42,7 @@ class AllProductsComponent extends Component {
     })
     return (
       <div className='container'>
-        <h3 className='text-center'>Our products</h3>
+        <h3 className='text-center'>My purchases</h3>
         {products}
         <Row>
           <Col xs={10} sm={8} md={6} xsOffset={1} smOffset={2} mdOffset={3}>
@@ -63,4 +63,4 @@ class AllProductsComponent extends Component {
     )
   }
 }
-export default AllProductsComponent
+export default BoughtProductsComponent

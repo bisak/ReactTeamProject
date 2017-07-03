@@ -65,7 +65,7 @@ module.exports = {
     let username = req.params.username
     let promises = []
     promises.push(User.findOne({ username: username }).select('-password').lean())
-    promises.push(Review.find({ creator: username }).select('-creator').populate('component').lean())
+    promises.push(Review.find({ creator: username }).select('-creator').sort('-createdAt').populate('component').lean())
 
     Promise.all(promises).then((resolutions) => {
       let data = {}

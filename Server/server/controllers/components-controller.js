@@ -22,8 +22,8 @@ module.exports.getComponents = (req, res) => {
 
   let queryArray = []
 
-  let countQuery = Component.where({ isVisible: true }).find()
-  let mainQuery = Component.where({ isVisible: true }).find()
+  let countQuery = Component.find({ isVisible: true })
+  let mainQuery = Component.find({ isVisible: true })
 
   if (search) {
     mainQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
@@ -52,6 +52,7 @@ module.exports.getComponents = (req, res) => {
       return res.status(500).json({ success: false, msg: 'An error occured.' })
     })
 }
+
 module.exports.getBoughtComponents = (req, res) => {
   let username = req.user.username
   let pageSize = 10
@@ -60,8 +61,8 @@ module.exports.getBoughtComponents = (req, res) => {
 
   let queryArray = []
 
-  let countQuery = Component.where({ buyers: username }).find()
-  let mainQuery = Component.where({ buyers: username }).find()
+  let countQuery = Component.find({ buyers: username })
+  let mainQuery = Component.find({ buyers: username })
 
   if (search) {
     mainQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
@@ -69,7 +70,7 @@ module.exports.getBoughtComponents = (req, res) => {
   }
 
   mainQuery
-    .sort('-createdAt')
+    .sort('-updatedAt')
     .skip((page - 1) * pageSize)
     .limit(pageSize)
 
@@ -107,7 +108,7 @@ module.exports.getDeletedComponents = (req, res) => {
   }
 
   mainQuery
-    .sort('-createdAt')
+    .sort('-updatedAt')
     .skip((page - 1) * pageSize)
     .limit(pageSize)
 
@@ -128,6 +129,7 @@ module.exports.getDeletedComponents = (req, res) => {
       return res.status(500).json({ success: false, msg: 'An error occured.' })
     })
 }
+
 module.exports.addComponent = (req, res) => {
   let sourceCode = req.file
   console.log(sourceCode)
@@ -144,6 +146,7 @@ module.exports.addComponent = (req, res) => {
     return res.status(500).json({ success: false, msg: 'Component cannot be created' })
   })
 }
+
 module.exports.editComponent = (req, res) => {
   let id = req.params.id
   let editedComponent = req.body
@@ -167,6 +170,7 @@ module.exports.editComponent = (req, res) => {
     })
   })
 }
+
 module.exports.deleteComponent = (req, res) => {
   let componentId = req.params.id
   Component.findByIdAndUpdate(componentId, { isVisible: false }).then((component) => {
@@ -177,6 +181,7 @@ module.exports.deleteComponent = (req, res) => {
     }
   }).catch(console.log)
 }
+
 module.exports.unDeleteComponent = (req, res) => {
   let componentId = req.params.id
   Component.findByIdAndUpdate(componentId, { isVisible: true }).then((component) => {
@@ -187,6 +192,7 @@ module.exports.unDeleteComponent = (req, res) => {
     }
   }).catch(console.log)
 }
+
 module.exports.buyComponent = (req, res) => {
   let componentId = req.params.id
   let buyer = req.user.username
@@ -200,6 +206,7 @@ module.exports.buyComponent = (req, res) => {
     }
   }).catch(console.log)
 }
+
 module.exports.addReview = (req, res) => {
   if (req.user.banned) {
     return res.status(400).json({ success: false, msg: 'You cannot add reviews' })
