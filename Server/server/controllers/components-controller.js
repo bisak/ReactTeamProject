@@ -13,6 +13,12 @@ module.exports.getComponentById = (req, res) => {
       component.bought = true
     }
     return res.status(200).json({ success: true, data: component })
+  }).catch(error => {
+    console.log(error)
+    if (error.name === 'CastError' && error.path === '_id') {
+      return res.status(404).json({ success: false, msg: 'Component was not found' })
+    }
+    return res.status(500).json({ success: false, msg: 'An error occured.' })
   })
 }
 module.exports.getComponents = (req, res) => {
@@ -132,7 +138,6 @@ module.exports.getDeletedComponents = (req, res) => {
 
 module.exports.addComponent = (req, res) => {
   let sourceCode = req.file
-  console.log(sourceCode)
   let productData = JSON.parse(req.body.data)
   if (!sourceCode) {
     return res.status(400).json({ success: false, msg: 'No file supplied' })
@@ -148,26 +153,32 @@ module.exports.addComponent = (req, res) => {
 }
 
 module.exports.editComponent = (req, res) => {
+  let newSourceCode = req.file
   let id = req.params.id
-  let editedComponent = req.body
+  let editedComponent = JSON.parse(req.body.data)
 
   Component.findById(id).then((component) => {
     if (!component) {
       return res.status(404).json({ success: false, msg: 'Component was not found' })
     }
-
     component.name = editedComponent.name
     component.description = editedComponent.description
     component.price = editedComponent.price
     component.imageUrl = editedComponent.imageUrl
     component.demoUrl = editedComponent.demoUrl
-    component.sourcePath = editedComponent.sourcePath
+    if (newSourceCode) {
+      console.log('ima')
+      component.sourcePath = newSourceCode.filename
+    }
     component.save().then(() => {
       Review.find({ component: component._id }).then((reviews) => {
         component.reviews = reviews
         return res.status(200).json({ success: true, data: component })
       })
     })
+  }).catch(error => {
+    console.log(error)
+    return res.status(500).json({ success: false, msg: 'An error occured.' })
   })
 }
 

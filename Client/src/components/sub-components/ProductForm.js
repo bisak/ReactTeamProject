@@ -4,13 +4,17 @@ import { ControlLabel, FormControl, FormGroup, Button, Form } from 'react-bootst
 class ProductForm extends Component {
   onFormSubmit (event) {
     event.preventDefault()
-    this.props.onAdd()
+    if (this.props.isEdit) {
+      this.props.onEdit()
+    } else {
+      this.props.onAdd()
+    }
   }
 
   render () {
     let fileInput = (<FormControl type='file' name='sourceCode' required onChange={this.props.onInput} />)
 
-    if(this.props.isEdit){
+    if (this.props.isEdit) {
       fileInput = (<FormControl type='file' name='sourceCode' onChange={this.props.onInput} />)
     }
 
@@ -48,7 +52,7 @@ class ProductForm extends Component {
         </FormGroup>
 
         <FormGroup>
-          <Button type='submit'>Add Product</Button>
+          <Button type='submit'> {this.props.isEdit ? 'Edit' : 'Add'} Product</Button>
         </FormGroup>
 
       </Form>

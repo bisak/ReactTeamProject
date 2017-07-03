@@ -34,11 +34,12 @@ const Routes = () => (
     {/* Admin only routes */}
     <PrivateRoute admin exact path='/products/deleted' component={RemovedProductsComponent} />
     <PrivateRoute admin exact path='/admin/add-product' component={AddProductComponent} />
-    <PrivateRoute admin exact path='/admin/edit-product' component={EditProductComponent} />
+    <PrivateRoute admin exact path='/admin/edit-product/:id' component={EditProductComponent} />
     <PrivateRoute admin exact path='/admin/add-admin' component={AddAdminComponent} />
     <PrivateRoute admin exact path='/admin/all-admins' component={AllAdminsComponent} />
     <PrivateRoute admin exact path='/admin/ban-user' component={BanUserComponent} />
 
+    <Route exact path='/not-found' component={NotFoundComponent} />
     <Route component={NotFoundComponent} />
   </Switch>
 )

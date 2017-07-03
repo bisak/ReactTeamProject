@@ -21,7 +21,7 @@ module.exports = (app) => {
   router.post('/users/:username/unban', auth.isAuthenticated('admin'), controllers.admins.unbanUser)
 
   router.post('/component/add', uploader.single('sourceCode'), auth.isAuthenticated('admin'), controllers.components.addComponent)
-  router.put('/component/:id/edit', auth.isAuthenticated('admin'), controllers.components.editComponent)
+  router.put('/component/:id/edit', uploader.single('sourceCode'), auth.isAuthenticated('admin'), controllers.components.editComponent)
   router.post('/component/:id/delete', auth.isAuthenticated('admin'), controllers.components.deleteComponent)
   router.post('/component/:id/un-delete', auth.isAuthenticated('admin'), controllers.components.unDeleteComponent)
   router.get('/components', controllers.components.getComponents)

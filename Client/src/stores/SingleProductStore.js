@@ -1,5 +1,6 @@
 import alt from '../alt'
 import SingleProductActions from '../actions/SingleProductActions'
+import history from '../history'
 import moment from 'moment'
 import toastr from 'toastr'
 
@@ -34,8 +35,11 @@ class SingleProductStore {
     this.product.bought = productData.bought
   }
 
-  onGetSingleProductError (data) {
-    console.log(data)
+  onGetSingleProductError (error) {
+    if (error.response.status === 404) {
+      history.replace('/not-found')
+    }
+    console.log(error.response)
   }
 
   onInputChange (event) {

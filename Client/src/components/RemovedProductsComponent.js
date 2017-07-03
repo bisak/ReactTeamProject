@@ -40,6 +40,14 @@ class RemovedProductsComponent extends Component {
     let products = this.state.products.map(product => {
       return (<ListProductComponent key={product._id} product={product} />)
     })
+
+    if (!products.length) {
+      return (
+        <div className='container'>
+          <h3 className='text-center'>There are no deleted products from the store</h3>
+        </div>
+      )
+    }
     return (
       <div className='container'>
         <h3 className='text-center'>Hidden products</h3>
