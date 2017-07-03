@@ -12,7 +12,7 @@ class ProductForm extends Component {
       <Form onSubmit={this.onFormSubmit.bind(this)} horizontal>
 
         <FormGroup controlId='description-input'>
-          <FormControl maxLength={500} componentClass='textarea' name='review' value={this.props.review} onChange={this.props.onInput} placeholder='Review this component.' />
+          <FormControl required maxLength={500} componentClass='textarea' name='review' value={this.props.review} onChange={this.props.onInput} placeholder='Review this component.' />
         </FormGroup>
 
         <FormGroup>

@@ -6,6 +6,7 @@ import alt from '../alt'
 import ReviewForm from './sub-components/ReviewForm'
 import Review from './sub-components/Review'
 import ConfirmPurchaseModal from './sub-components/ConfirmPurchaseModal'
+import Auth from '../Auth'
 
 class SingleProductComponent extends Component {
   constructor (props) {
@@ -45,14 +46,23 @@ class SingleProductComponent extends Component {
     })
 
     let noReviewsMessage
-
+    let loginForm
     if (!reviews.length) {
       noReviewsMessage = <h5 className='text-center'>No reviews for this component. Add the first one.</h5>
     }
 
-    let actionButton = (<Button className='action-button center-block' onClick={SingleProductActions.handleModalOpen} bsStyle='success'>Buy for ${this.state.product.price}</Button>)
-    if (this.state.product.bought) {
-      actionButton = (<Button className='action-button center-block' bsStyle='success'>Download Source</Button>)
+    let actionButton = null
+    if (Auth.isUserAuthenticated()) {
+      actionButton = (<Button className='action-button center-block' onClick={SingleProductActions.handleModalOpen} bsStyle='success'>Buy for ${this.state.product.price}</Button>)
+      if (this.state.product.bought) {
+        actionButton = (<Button className='action-button center-block' bsStyle='success'>Download Source</Button>)
+      }
+      loginForm = (
+        <Row>
+          <Col xs={10} sm={10} md={6} smOffset={1} xsOffset={1} mdOffset={3}>
+            <ReviewForm review={this.state.review} onInput={SingleProductActions.inputChange} onAdd={this.handleAddReview.bind(this)} />
+          </Col>
+        </Row>)
     }
     return (
       <div className='container'>
@@ -79,11 +89,7 @@ class SingleProductComponent extends Component {
           </Col>
         </Row>
 
-        <Row>
-          <Col xs={10} sm={10} md={6} smOffset={1} xsOffset={1} mdOffset={3}>
-            <ReviewForm review={this.state.review} onInput={SingleProductActions.inputChange} onAdd={this.handleAddReview.bind(this)} />
-          </Col>
-        </Row>
+        {loginForm}
 
         <Row className='bottom-profile-section'>
           <Col className='thin-grey-border' xs={12} sm={10} smOffset={1}>

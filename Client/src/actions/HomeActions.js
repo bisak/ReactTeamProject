@@ -10,7 +10,7 @@ class HomeActions {
   }
 
   getHomeStats () {
-    return axios.get(`${config.baseUrl}/home/stats`).then((response) => {
+    return axios.get(`${config.baseUrl}/stats/home`).then((response) => {
       this.getHomeStatsSuccess(response.data)
       return true
     }).catch((error) => {

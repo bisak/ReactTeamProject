@@ -52,7 +52,10 @@ class SingleProductStore {
   }
 
   onAddReviewError (data) {
-
+    if (data.response.status === 401) {
+      toastr.options.positionClass = 'toast-bottom-right'
+      toastr.warning('Log in to post a review.')
+    }
   }
 
   onBuySuccess (response) {
