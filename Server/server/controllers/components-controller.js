@@ -101,7 +101,7 @@ module.exports.deleteComponent = (req, res) => {
 module.exports.buyComponent = (req, res) => {
   let componentId = req.params.id
   let buyer = req.user.username
-  Component.findByIdAndUpdate(componentId,{ $addToSet: { buyers: buyer } }).then((component) => {
+  Component.findByIdAndUpdate(componentId, { $addToSet: { buyers: buyer } }).then((component) => {
       if (!component) {
         return res.status(404).json({ success: false, msg: 'Component was not found' })
       } else if (component.buyers.indexOf(buyer) > -1) {

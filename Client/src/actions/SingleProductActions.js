@@ -19,7 +19,7 @@ class SingleProductActions {
       this.getSingleProductSuccess(response.data)
       return true
     }).catch(error => {
-      this.getSingleProductSuccess(error)
+      this.getSingleProductError(error)
       return true
     })
   }
