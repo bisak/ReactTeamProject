@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FormControl, FormGroup, Button, Form } from 'react-bootstrap'
 
-class ProductForm extends Component {
+class ReviewForm extends Component {
   onFormSubmit (event) {
     event.preventDefault()
     this.props.onAdd()
@@ -11,7 +11,7 @@ class ProductForm extends Component {
     return (
       <Form onSubmit={this.onFormSubmit.bind(this)} horizontal>
 
-        <FormGroup controlId='description-input'>
+        <FormGroup controlId='review-input'>
           <FormControl required maxLength={500} componentClass='textarea' name='review' value={this.props.review} onChange={this.props.onInput} placeholder='Review this component.' />
         </FormGroup>
 
@@ -24,4 +24,4 @@ class ProductForm extends Component {
     )
   }
 }
-export default ProductForm
+export default ReviewForm

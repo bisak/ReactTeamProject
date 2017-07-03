@@ -16,7 +16,8 @@ class SingleProductStore {
       postedAgo: '',
       _id: '',
       reviews: [],
-      bought: false
+      bought: false,
+      isVisible: true
     }
     this.review = ''
     this.showModal = false
@@ -33,6 +34,7 @@ class SingleProductStore {
     this.product._id = productData._id
     this.product.reviews = productData.reviews
     this.product.bought = productData.bought
+    this.product.isVisible = productData.isVisible
   }
 
   onGetSingleProductError (error) {
@@ -69,8 +71,8 @@ class SingleProductStore {
     this.product.bought = true
   }
 
-  onBuyError (response) {
-    console.log(response.response)
+  onBuyError (error) {
+    console.log(error.response)
   }
 
   onHandleModalClose () {
@@ -79,6 +81,28 @@ class SingleProductStore {
 
   onHandleModalOpen () {
     this.showModal = true
+  }
+
+  onDeleteSuccess (response) {
+    this.product.isVisible = false
+    toastr.options.positionClass = 'toast-bottom-right'
+    toastr.success('Sucessfully deleted product.')
+    console.log(response)
+  }
+
+  onDeleteError (error) {
+    console.log(error.response)
+  }
+
+  onUnDeleteSuccess (response) {
+    this.product.isVisible = true
+    toastr.options.positionClass = 'toast-bottom-right'
+    toastr.success('Sucessfully Undeleted product.')
+    console.log(response)
+  }
+
+  onUnDeleteError (error) {
+    console.log(error.response)
   }
 }
 
