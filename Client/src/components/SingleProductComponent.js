@@ -46,7 +46,7 @@ class SingleProductComponent extends Component {
         <Row>
           <Col xs={12} sm={10} smOffset={1}>
             <a href={this.state.product.imageUrl} rel='noopener noreferrer' target='_blank'>
-              <Image alt='Component demo image' src={this.state.product.imageUrl} responsive rounded thumbnail />
+              <Image className='center-block' alt='Component demo image' src={this.state.product.imageUrl} responsive rounded thumbnail />
             </a>
           </Col>
         </Row>

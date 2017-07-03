@@ -28,6 +28,8 @@ module.exports = (app) => {
   router.post('/component/:id/buy', auth.isAuthenticated(), controllers.components.buyComponent)
   router.post('/component/:id/review', auth.isAuthenticated(), controllers.components.addReview)
 
+  router.get('/home/stats', controllers.components.getHomeStats)
+
   router.all('*', (req, res) => {
     res.status(404)
     res.send('404 Not Found!')

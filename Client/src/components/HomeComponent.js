@@ -3,8 +3,29 @@ import {Jumbotron, Row, Col} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import Auth from '../Auth'
 import CountTo from 'react-count-to'
+import HomeStore from '../stores/HomeStore'
+import HomeActions from '../actions/HomeActions'
 
 class FooterComponent extends Component {
+  constructor (props) {
+    super(props)
+    this.state = HomeStore.getState()
+    this.onChange = this.onChange.bind(this)
+  }
+
+  componentDidMount () {
+    HomeStore.listen(this.onChange)
+    HomeActions.getHomeStats()
+  }
+
+  componentWillUnmount () {
+    HomeStore.unlisten(this.onChange)
+  }
+
+  onChange (state) {
+    this.setState(state)
+  }
+
   render () {
     let loginButton
     let registerButton
@@ -28,17 +49,17 @@ class FooterComponent extends Component {
         <div className='container text-center'>
           <Row>
             <Col md={4} >
-              <h2><CountTo to={250} speed={2000} /></h2>
+              <h2><CountTo to={this.state.stats.users} speed={1234} /></h2>
               <p>Happy users</p>
               {registerButton}
             </Col>
             <Col md={4} >
-              <h2><CountTo to={500} speed={2000} /></h2>
+              <h2><CountTo to={this.state.stats.allComponents} speed={1234} /></h2>
               <p>React components for sale</p>
               {productsButton}
             </Col>
             <Col md={4} >
-              <h2><CountTo to={469} speed={2000} /></h2>
+              <h2><CountTo to={this.state.stats.purchases} speed={1234} /></h2>
               <p>Purchases</p>
               {loginButton}
             </Col>

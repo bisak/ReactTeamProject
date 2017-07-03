@@ -1,5 +1,6 @@
 const Component = require('../data/Component')
 const Review = require('../data/Review')
+const User = require('../data/User')
 
 module.exports.getComponentById = (req, res) => {
   let id = req.params.id
@@ -101,15 +102,15 @@ module.exports.deleteComponent = (req, res) => {
 module.exports.buyComponent = (req, res) => {
   let componentId = req.params.id
   let buyer = req.user.username
-  Component.findByIdAndUpdate(componentId,{ $addToSet: { buyers: buyer } }).then((component) => {
-      if (!component) {
-        return res.status(404).json({ success: false, msg: 'Component was not found' })
-      } else if (component.buyers.indexOf(buyer) > -1) {
-        return res.status(400).json({ success: false, msg: 'Component is already bought' })
-      } else {
-        return res.status(200).json({ success: true, msg: 'Component bought successfully' })
-      }
-    }).catch(console.log)
+  Component.findByIdAndUpdate(componentId, { $addToSet: { buyers: buyer } }).then((component) => {
+    if (!component) {
+      return res.status(404).json({ success: false, msg: 'Component was not found' })
+    } else if (component.buyers.indexOf(buyer) > -1) {
+      return res.status(400).json({ success: false, msg: 'Component is already bought' })
+    } else {
+      return res.status(200).json({ success: true, msg: 'Component bought successfully' })
+    }
+  }).catch(console.log)
 }
 module.exports.addReview = (req, res) => {
   let review = req.body
@@ -127,6 +128,24 @@ module.exports.addReview = (req, res) => {
         return res.status(200).json({ success: true, data: review, msg: 'Review added successfully' })
       })
     })
+  }).catch(error => {
+    console.log(error)
+    return res.status(500).json({success: false, msg: 'Server Error'})
+  })
+}
+
+module.exports.getHomeStats = (req, res) => {
+  let usersQuery = User.find().count()
+  let componentsQuery = Component.find().select('buyers -_id')
+  Promise.all([usersQuery, componentsQuery]).then((resolutions) => {
+    const usersCount = resolutions[0]
+    let components = resolutions[1]
+    let componentsCount = components.length
+    let purchasesCount = 0
+    components.map(component => {
+      purchasesCount += component.buyers.length
+    })
+    return res.status(200).json({success: true, data: {componentsCount, usersCount, purchasesCount}})
   }).catch(error => {
     console.log(error)
     return res.status(500).json({success: false, msg: 'Server Error'})
