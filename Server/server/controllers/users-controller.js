@@ -65,15 +65,13 @@ module.exports = {
   getUserById (req, res) {
     let username = req.params.username
     let promises = []
-    promises.push(User.find({ username: username }).select('-password').lean())
-    promises.push(Review.find({ creator: username }).select('-creator').lean())
-    promises.push(Component.find({ buyers: username }).select('-buyers -reviews').lean())
+    promises.push(User.findOne({ username: username }).select('-password').lean())
+    promises.push(Review.find({ creator: username }).select('-creator').populate('component').lean())
 
     Promise.all(promises).then((resolutions) => {
       let data = {}
       data.user = resolutions[0]
       data.reviews = resolutions[1]
-      data.boughtComponents = resolutions[2]
       return res.status(200).json({ success: true, data: data })
     })
   }
