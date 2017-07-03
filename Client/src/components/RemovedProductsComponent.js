@@ -8,7 +8,7 @@ import queryString from 'query-string'
 import history from '../history'
 import SingleProductActions from '../actions/SingleProductActions'
 
-class AllProductsComponent extends Component {
+class RemovedProductsComponent extends Component {
   constructor (props) {
     super(props)
     this.state = AllProductsStore.getState()
@@ -18,7 +18,7 @@ class AllProductsComponent extends Component {
 
   componentDidMount () {
     AllProductsStore.listen(this.onChange)
-    AllProductsActions.getOnePageProducts(this.page)
+    AllProductsActions.getOnePageRemovedProducts(this.page)
   }
 
   componentWillUnmount () {
@@ -33,25 +33,17 @@ class AllProductsComponent extends Component {
   handleSelect (page) {
     if (history.location.search !== `?page=${page}`) {
       history.push(`?page=${page}`)
-      AllProductsActions.getOnePageProducts(page)
+      AllProductsActions.getOnePageRemovedProducts(page)
     }
   }
 
   render () {
     let products = this.state.products.map(product => {
-      return (<ListProductComponent onDelete={SingleProductActions.deleteProduct} key={product._id} product={product} />)
+      return (<ListProductComponent showUnDelete onUnDelete={SingleProductActions.unDeleteProduct} key={product._id} product={product} />)
     })
-
-    if (!products.length) {
-      return (
-        <div className='container'>
-          <h3 className='text-center'>Unfortunately there are no products in our store</h3>
-        </div>
-      )
-    }
     return (
       <div className='container'>
-        <h3 className='text-center'>Our products</h3>
+        <h3 className='text-center'>Hidden products</h3>
         {products}
         <Row>
           <Col xs={10} sm={8} md={6} xsOffset={1} smOffset={2} mdOffset={3}>
@@ -72,4 +64,4 @@ class AllProductsComponent extends Component {
     )
   }
 }
-export default AllProductsComponent
+export default RemovedProductsComponent
