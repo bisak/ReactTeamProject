@@ -55,9 +55,7 @@ module.exports = (app) => {
   router.get('/stats/all', auth.isAuthenticated('admin'), controllers.admins.getFullStats)
 
   router.all('*', (req, res) => {
-    res.status(404)
-    res.send('404 Not Found!')
-    res.end()
+    res.status(404).json({success: false, msg: '404 Not Found!'})
   })
 
   app.use('/api/', router)

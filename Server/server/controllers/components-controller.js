@@ -34,7 +34,7 @@ module.exports.getComponents = (req, res) => {
 
   if (search) {
     mainQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
-    countQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
+    countQuery = countQuery.where('name').regex(new RegExp(search, 'i'))
   }
 
   mainQuery
@@ -73,7 +73,7 @@ module.exports.getBoughtComponents = (req, res) => {
 
   if (search) {
     mainQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
-    countQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
+    countQuery = countQuery.where('name').regex(new RegExp(search, 'i'))
   }
 
   mainQuery
@@ -111,7 +111,7 @@ module.exports.getDeletedComponents = (req, res) => {
 
   if (search) {
     mainQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
-    countQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
+    countQuery = countQuery.where('name').regex(new RegExp(search, 'i'))
   }
 
   mainQuery
@@ -224,7 +224,6 @@ module.exports.getComponentSource = (req, res) => {
       return res.status(404).json({ success: false, msg: 'Component was not found' })
     } else {
       let sourceFile = path.join(__dirname, '/../../sources', component.sourcePath)
-      console.log(sourceFile)
       return res.status(200).download(sourceFile)
     }
   }).catch(error => {
@@ -234,6 +233,7 @@ module.exports.getComponentSource = (req, res) => {
 }
 
 module.exports.addReview = (req, res) => {
+  console.log(req.user)
   if (req.user.banned) {
     return res.status(400).json({ success: false, msg: 'You cannot add reviews' })
   }

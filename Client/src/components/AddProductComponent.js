@@ -30,7 +30,7 @@ class AddProductComponent extends Component {
 
   render () {
     return (
-      <div className='container'>
+      <div className='container remove-navbar-margin'>
         <Row><h3 className='text-center'>Add Product</h3></Row>
 
         <Row>

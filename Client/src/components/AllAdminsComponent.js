@@ -1,16 +1,40 @@
 import React, { Component } from 'react'
 import ListUserComponent from './sub-components/ListUserComponent'
+import UsersActions from '../actions/UsersActions'
+import UsersStore from '../stores/UsersStore'
 
-// Admin only
-class AllAdminsComponent extends Component {
+class AddAdminComponent extends Component {
+  constructor (props) {
+    super(props)
+    this.state = UsersStore.getState()
+    this.onChange = this.onChange.bind(this)
+  }
+
+  componentDidMount () {
+    UsersStore.listen(this.onChange)
+    UsersActions.getAdminUsers()
+  }
+
+  componentWillUnmount () {
+    UsersStore.unlisten(this.onChange)
+  }
+
+  onChange (state) {
+    this.setState(state)
+  }
+
   render () {
+    let users = this.state.users.map(user => {
+      return (<ListUserComponent onAdminRemove={UsersActions.removeAdmin} allAdmins key={user._id} user={user} />)
+    })
     return (
-      <div className='container'>
-        <h3 className='text-center'>All admins</h3>
-        <ListUserComponent />
-        <ListUserComponent />
+      <div>
+        <div className='container remove-navbar-margin'>
+          <h3 className='text-center'>All admins</h3>
+          {users}
+        </div>
       </div>
     )
   }
 }
-export default AllAdminsComponent
+export default AddAdminComponent

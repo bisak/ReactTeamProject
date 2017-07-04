@@ -16,18 +16,26 @@ class AllProductsStore {
     this.products = []
     this.pagesCount = 0
     this.activePage = 1
+    this.search = ''
+    this.noProductsAvailable = false
   }
 
   onGetProductsSuccess (resp) {
     let ajaxData = resp[0]
     let requestPage = resp[1]
     this.products = ajaxData.data.products
+    if (this.products.length === 0) {
+      this.noProductsAvailable = true
+    } else {
+      this.noProductsAvailable = false
+    }
     this.pagesCount = ajaxData.data.pagesCount
     this.activePage = requestPage
+    window.scrollTo(0, 0)
   }
 
-  onGetProductsError (data) {
-    console.log(data)
+  onGetProductsError (error) {
+    console.log(error)
     toastr.error('An error occured when getting posts.')
   }
 
@@ -45,6 +53,11 @@ class AllProductsStore {
 
   onUnDeleteError (error) {
     console.log(error.response)
+  }
+
+  onInputChange (event) {
+    const target = event.target
+    this.search = target.value
   }
 }
 
