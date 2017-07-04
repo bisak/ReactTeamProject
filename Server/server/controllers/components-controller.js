@@ -1,6 +1,7 @@
 const Component = require('../data/Component')
 const Review = require('../data/Review')
 const Statistic = require('../data/Statistic')
+const path = require('path')
 
 module.exports.getComponentById = (req, res) => {
   let id = req.params.id
@@ -167,7 +168,6 @@ module.exports.editComponent = (req, res) => {
     component.imageUrl = editedComponent.imageUrl
     component.demoUrl = editedComponent.demoUrl
     if (newSourceCode) {
-      console.log('ima')
       component.sourcePath = newSourceCode.filename
     }
     component.save().then(() => {
@@ -215,6 +215,22 @@ module.exports.buyComponent = (req, res) => {
       return res.status(200).json({ success: true, msg: 'Component bought successfully' })
     }
   }).catch(console.log)
+}
+
+module.exports.getComponentSource = (req, res) => {
+  let componentId = req.params.id
+  Component.findById(componentId).then((component) => {
+    if (!component) {
+      return res.status(404).json({ success: false, msg: 'Component was not found' })
+    } else {
+      let sourceFile = path.join(__dirname, '/../../sources', component.sourcePath)
+      console.log(sourceFile)
+      return res.status(200).download(sourceFile)
+    }
+  }).catch(error => {
+    console.log(error)
+    return res.status(500).json({ success: false, msg: 'Server Error' })
+  })
 }
 
 module.exports.addReview = (req, res) => {

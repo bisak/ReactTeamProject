@@ -37,6 +37,9 @@ class SingleProductComponent extends Component {
   handleBuy () {
     SingleProductActions.buyProduct(this.state.product._id)
   }
+  handleDownloadSource () {
+    SingleProductActions.downloadSource(this.state.product._id)
+  }
 
   handleDelete () {
     SingleProductActions.deleteProduct(this.state.product._id)
@@ -66,7 +69,7 @@ class SingleProductComponent extends Component {
     if (Auth.isUserAuthenticated()) {
       actionButton = (<Button className='smb center-block' onClick={SingleProductActions.handleModalOpen} bsStyle='success'>Buy for ${this.state.product.price}</Button>)
       if (this.state.product.bought) {
-        actionButton = (<Button className='smb center-block' bsStyle='success'>Download Source</Button>)
+        actionButton = (<Button className='smb center-block' onClick={this.handleDownloadSource.bind(this)} bsStyle='success'>Download Source</Button>)
       }
       reviewForm = (<ReviewForm review={this.state.review} onInput={SingleProductActions.inputChange} onAdd={this.handleAddReview.bind(this)} />)
     }

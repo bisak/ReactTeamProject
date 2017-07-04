@@ -12,6 +12,5 @@ module.exports = (app) => {
   app.use(passport.session())
   app.use(cors())
   app.use(express.static('public'))
-
   console.log('Express ready!')
 }

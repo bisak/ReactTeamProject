@@ -43,13 +43,20 @@ class SingleProductActions {
   }
 
   buyProduct (id) {
-    return axios.post(`${config.baseUrl}/component/${id}/buy`, {}, {headers: Auth.getAuthHeader()}).then(response => {
+    return axios.post(`${config.baseUrl}/component/${id}/buy`, {}, { headers: Auth.getAuthHeader() }).then(response => {
       this.buySuccess(response.data)
       return true
     }).catch(error => {
       this.buyError(error)
       return true
     })
+  }
+
+  downloadSource (id) {
+    const response = {
+      file: `${config.baseUrl}/component/${id}/source`
+    }
+    window.open(response.file)
   }
 
   deleteProduct (id) {

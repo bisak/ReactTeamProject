@@ -19,8 +19,8 @@ class AddProductsActions {
     delete productToAddCopy.sourceCode
     formData.append('data', JSON.stringify(productToAddCopy))
     formData.append('sourceCode', sourceCode)
-    return axios.post(`${config.baseUrl}/component/add`, formData, {headers: Auth.getAuthHeader()}).then((success) => {
-      this.addProductSuccess(success)
+    return axios.post(`${config.baseUrl}/component/add`, formData, {headers: Auth.getAuthHeader()}).then((response) => {
+      this.addProductSuccess(response.data)
       return true
     }).catch((error) => {
       this.addProductError(error)

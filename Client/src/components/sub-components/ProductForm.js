@@ -12,10 +12,10 @@ class ProductForm extends Component {
   }
 
   render () {
-    let fileInput = (<FormControl type='file' name='sourceCode' required onChange={this.props.onInput} />)
+    let fileInput = (<FormControl type='file' accept='.zip,.rar,.7z,.7zip' name='sourceCode' required onChange={this.props.onInput} />)
 
     if (this.props.isEdit) {
-      fileInput = (<FormControl type='file' name='sourceCode' onChange={this.props.onInput} />)
+      fileInput = (<FormControl type='file' accept='.zip,.rar,.7z,.7zip' name='sourceCode' onChange={this.props.onInput} />)
     }
 
     return (

@@ -19,7 +19,7 @@ module.exports = (settings) => {
     Statistic.updateStatistic()
     setInterval(() => {
       Statistic.updateStatistic()
-      console.log('updating')
+      console.log('updating statistic')
     }, settings.statisticsUpdateInterval)
   })
 

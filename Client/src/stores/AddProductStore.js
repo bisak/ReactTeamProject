@@ -1,6 +1,7 @@
 import alt from '../alt'
 import AddProductActions from '../actions/AddProductActions'
 import toastr from 'toastr'
+import history from '../history'
 
 class AddProductStore {
   constructor () {
@@ -19,6 +20,7 @@ class AddProductStore {
     alt.recycle(this)
     toastr.options.positionClass = 'toast-bottom-right'
     toastr.success('Successfully added product.')
+    history.push(`/product/${response.data._id}`)
   }
 
   onAddProductError (response) {
