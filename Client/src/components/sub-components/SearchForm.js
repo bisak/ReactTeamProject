@@ -9,7 +9,7 @@ class SearchForm extends Component {
 
   render () {
     return (
-      <Form onSubmit={this.handleSubmit.bind(this)} inline>
+      <Form className='smb' onSubmit={this.handleSubmit.bind(this)} inline>
         <FormGroup controlId='formInlineSearch'>
           <FormControl type='text' name='search' value={this.props.search} onChange={this.props.onInput} placeholder='Component name...' />
         </FormGroup>

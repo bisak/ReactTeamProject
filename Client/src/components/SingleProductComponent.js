@@ -84,7 +84,7 @@ class SingleProductComponent extends Component {
 
     return (
       <div className='container'>
-        <Col className='z-depth-2' xs={12} sm={10} smOffset={1}>
+        <Col className='z-depth-1' xs={12} sm={10} smOffset={1}>
           <Row><h4 className='text-center break-word'><strong>{this.state.product.name}</strong> (${this.state.product.price})</h4></Row>
           <Row>{actionButton}</Row>
           <Row>{deletePostBtn}</Row>
@@ -94,7 +94,7 @@ class SingleProductComponent extends Component {
           <Row>
             <Col xs={12} sm={10} smOffset={1}>
               <a href={this.state.product.imageUrl} rel='noopener noreferrer' target='_blank'>
-                <Image className='center-block' alt='Component demo image' src={this.state.product.imageUrl} responsive rounded thumbnail />
+                <Image className='center-block z-depth-1' alt='Component demo image' src={this.state.product.imageUrl} responsive rounded />
               </a>
             </Col>
           </Row>
@@ -118,7 +118,7 @@ class SingleProductComponent extends Component {
         </Row>
 
         <Row className='bottom-profile-section'>
-          <Col className='z-depth-2' xs={12} sm={10} smOffset={1}>
+          <Col className='z-depth-1' xs={12} sm={10} smOffset={1}>
             <h4 className='text-center'>Reviews</h4>
             <hr />
             {reviews}

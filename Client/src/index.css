@@ -158,7 +158,6 @@ textarea {
 @media (min-width: 768px) {
   .image-container {
     max-height: 200px;
-    overflow: hidden;
   }
 }
 

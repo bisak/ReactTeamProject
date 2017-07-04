@@ -43,7 +43,7 @@ class ProfileComponent extends Component {
       <div className='container'>
         <Row>
           <Col xs={4} xsOffset={4} md={2} mdOffset={5}>
-            <Image alt='User Avatar' src={this.state.user.profilePic} responsive circle />
+            <Image className='z-depth-1' alt='User Avatar' src={this.state.user.profilePic} responsive circle />
           </Col>
         </Row>
         <Row>
@@ -52,7 +52,7 @@ class ProfileComponent extends Component {
         </Row>
         <hr className='no-margin no-padding' />
         <Row className='bottom-profile-section'>
-          <Col className='thin-grey-border' xs={10} xsOffset={1}>
+          <Col className='z-depth-1' xs={10} xsOffset={1}>
             <h4 className='text-center'>Reviews</h4>
             <hr />
             {reviews}

@@ -42,7 +42,7 @@ class ListProductComponent extends Component {
         <Col md={10} mdOffset={1} className='list-product-card z-depth-1'>
           <Col className='image-container' xs={12} sm={5}>
             <Link to={`/product/${this.props.product._id}`}>
-              <Image className='list-image' alt='Product demo image' src={this.props.product.imageUrl} responsive rounded />
+              <Image className='list-image z-depth-1' alt='Product demo image' src={this.props.product.imageUrl} responsive rounded />
             </Link>
           </Col>
           <Col xs={12} sm={5} className='list-product-text'>
