@@ -47,7 +47,7 @@ class FooterComponent extends Component {
         </Jumbotron>
 
         <div className='container text-center'>
-          <Row>
+          <Row >
             <Col md={4} >
               <h2><CountTo to={this.state.stats.users} speed={1234} /></h2>
               <p>Happy users</p>

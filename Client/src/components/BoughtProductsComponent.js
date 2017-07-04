@@ -42,14 +42,11 @@ class BoughtProductsComponent extends Component {
       return (<ListProductComponent hideAllControls key={product._id} product={product} />)
     })
 
-    if (!products.length) {
+    if (this.state.noProductsAvailable) {
       return (
         <div className='container'>
-          <h4 className='text-center'>You have not bought anything so far</h4>
-          <h5 className='text-center'>
-            <Link to={'/products'}> Find </Link>
-            a component you may need
-            </h5>
+          <h4 className='text-center'>You have no purchases.</h4>
+          <h5 className='text-center'><Link to={'/products'}>Find</Link> a component you may need.</h5>
         </div>
       )
     }

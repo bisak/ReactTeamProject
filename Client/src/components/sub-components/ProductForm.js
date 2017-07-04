@@ -52,7 +52,7 @@ class ProductForm extends Component {
         </FormGroup>
 
         <FormGroup>
-          <Button type='submit'> {this.props.isEdit ? 'Edit' : 'Add'} Product</Button>
+          <Button className='center-block' type='submit'> {this.props.isEdit ? 'Edit' : 'Add'} Product</Button>
         </FormGroup>
 
       </Form>

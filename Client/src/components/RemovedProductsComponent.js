@@ -42,23 +42,17 @@ class RemovedProductsComponent extends Component {
       return (<ListProductComponent showUnDelete onUnDelete={SingleProductActions.unDeleteProduct} key={product._id} product={product} />)
     })
     return (
-      <div className='container'>
+      <div className='container remove-navbar-margin'>
         <h3 className='text-center'>Hidden products</h3>
         {products}
         <Row>
-          <Col xs={10} sm={8} md={6} xsOffset={1} smOffset={2} mdOffset={3}>
-            <Pagination
-              prev
-              next
-              first
-              last
-              ellipsis
-              boundaryLinks
+          <div className='fit-content center-block'>
+            <Pagination prev next first last ellipsis boundaryLinks
               items={this.state.pagesCount}
               maxButtons={3}
               activePage={this.state.activePage}
               onSelect={this.handleSelect} />
-          </Col>
+          </div>
         </Row>
       </div>
     )

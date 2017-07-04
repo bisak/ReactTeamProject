@@ -8,16 +8,19 @@ class AllProductsActions {
     this.generateActions(
       'getProductsSuccess',
       'getProductsError',
-      'changePageSuccess'
+      'changePageSuccess',
+      'inputChange'
     )
   }
 
-  getOnePageProducts (page) {
-    return axios.get(`${config.baseUrl}/components?page=${page}`).then((response) => {
+  getOnePageProducts (page, search) {
+    if (!search) search = ''
+    return axios.get(`${config.baseUrl}/components?page=${page}&search=${search}`).then((response) => {
       this.getProductsSuccess(response.data, page)
       return true
-    }).catch((response) => {
-      this.getProductsError(response.data)
+    }).catch((error) => {
+      console.log(error.response)
+      this.getProductsError(error)
       return true
     })
   }
@@ -26,8 +29,8 @@ class AllProductsActions {
     return axios.get(`${config.baseUrl}/components/bought?page=${page}`, {headers: Auth.getAuthHeader()}).then((response) => {
       this.getProductsSuccess(response.data, page)
       return true
-    }).catch((response) => {
-      this.getProductsError(response.data)
+    }).catch((error) => {
+      this.getProductsError(error)
       return true
     })
   }
@@ -36,8 +39,8 @@ class AllProductsActions {
     return axios.get(`${config.baseUrl}/components/deleted?page=${page}`, {headers: Auth.getAuthHeader()}).then((response) => {
       this.getProductsSuccess(response.data, page)
       return true
-    }).catch((response) => {
-      this.getProductsError(response.data)
+    }).catch((error) => {
+      this.getProductsError(error)
       return true
     })
   }

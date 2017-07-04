@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
-import {Row, Col, Form, FormGroup, FormControl, Button} from 'react-bootstrap'
+import {Form, FormGroup, FormControl, Button} from 'react-bootstrap'
 
 class SearchForm extends Component {
+  handleSubmit (event) {
+    event.preventDefault()
+    this.props.onSearch()
+  }
+
   render () {
     return (
-      <Form inline>
-
-        <FormGroup controlId="formInlineEmail">
-          <FormControl type="text" name='search' placeholder="Search" />
+      <Form onSubmit={this.handleSubmit.bind(this)} inline>
+        <FormGroup controlId='formInlineSearch'>
+          <FormControl type='text' name='search' value={this.props.search} onChange={this.props.onInput} placeholder='Component name...' />
         </FormGroup>
         {' '}
-        <Button type="submit">
-          Find
-        </Button>
-        
+        <Button type='submit'>Search</Button>
+
       </Form>
     )
   }

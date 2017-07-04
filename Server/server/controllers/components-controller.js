@@ -33,7 +33,7 @@ module.exports.getComponents = (req, res) => {
 
   if (search) {
     mainQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
-    countQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
+    countQuery = countQuery.where('name').regex(new RegExp(search, 'i'))
   }
 
   mainQuery
@@ -51,6 +51,7 @@ module.exports.getComponents = (req, res) => {
       let objToReturn = {}
       objToReturn.products = resolutions[0]
       objToReturn.pagesCount = Math.ceil(resolutions[1] / 10)
+      console.log(objToReturn)
       return res.status(200).json({ success: true, data: objToReturn })
     })
     .catch(error => {
@@ -72,7 +73,7 @@ module.exports.getBoughtComponents = (req, res) => {
 
   if (search) {
     mainQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
-    countQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
+    countQuery = countQuery.where('name').regex(new RegExp(search, 'i'))
   }
 
   mainQuery
@@ -110,7 +111,7 @@ module.exports.getDeletedComponents = (req, res) => {
 
   if (search) {
     mainQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
-    countQuery = mainQuery.where('name').regex(new RegExp(search, 'i'))
+    countQuery = countQuery.where('name').regex(new RegExp(search, 'i'))
   }
 
   mainQuery

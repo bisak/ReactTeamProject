@@ -17,10 +17,7 @@ module.exports = (settings) => {
 
     User.seedAdminUser()
     Statistic.updateStatistic()
-    setInterval(() => {
-      Statistic.updateStatistic()
-      console.log('updating')
-    }, settings.statisticsUpdateInterval)
+    setInterval(Statistic.updateStatistic, settings.statisticsUpdateInterval)
   })
 
   db.on('error', err => console.log(`Database error: ${err}`))

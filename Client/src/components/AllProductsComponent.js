@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Pagination, Row, Col} from 'react-bootstrap'
+import { Pagination, Row, Col } from 'react-bootstrap'
 import ListProductComponent from './sub-components/ListProductComponent'
 import alt from '../alt'
 import AllProductsStore from '../stores/AllProductsStore'
@@ -15,11 +15,12 @@ class AllProductsComponent extends Component {
     this.state = AllProductsStore.getState()
     this.onChange = this.onChange.bind(this)
     this.page = Number(queryString.parse(history.location.search).page) || 1
+    this.search = queryString.parse(history.location.search).search || ''
   }
 
   componentDidMount () {
     AllProductsStore.listen(this.onChange)
-    AllProductsActions.getOnePageProducts(this.page)
+    AllProductsActions.getOnePageProducts(this.page, this.search)
   }
 
   componentWillUnmount () {
@@ -31,11 +32,17 @@ class AllProductsComponent extends Component {
     this.setState(state)
   }
 
-  handleSelect (page) {
-    if (history.location.search !== `?page=${page}`) {
-      history.push(`?page=${page}`)
-      AllProductsActions.getOnePageProducts(page)
-    }
+  handlePageSelect (page) {
+    this.page = page
+    history.push(`?page=${this.page}&search=${this.search}`)
+    AllProductsActions.getOnePageProducts(this.page, this.search)
+  }
+
+  handleSearch () {
+    this.search = this.state.search
+    this.page = 1
+    history.push(`?page=${this.page}&search=${this.search}`)
+    AllProductsActions.getOnePageProducts(this.page, this.search)
   }
 
   render () {
@@ -43,37 +50,32 @@ class AllProductsComponent extends Component {
       return (<ListProductComponent onDelete={SingleProductActions.deleteProduct} key={product._id} product={product} />)
     })
 
-    if (!products.length) {
-      return (
+    if (this.state.noProductsAvailable) {
+      products = (
         <div className='container'>
-          <h3 className='text-center'>Unfortunately there are no products in our store</h3>
+          <h3 className='text-center'>There are no such products in our store.</h3>
         </div>
       )
     }
+
     return (
-      <div className='container'>
+      <div className='container remove-navbar-margin'>
         <h3 className='text-center'>Our products</h3>
         <Row>
-          <div className='center-block'>
-            <SearchForm/>
-            </div>
-        
+          <Col className='center-block fit-content'>
+            <SearchForm search={this.state.search} onSearch={this.handleSearch.bind(this)} onInput={AllProductsActions.inputChange} />
+          </Col>
         </Row>
         {products}
         <Row>
-          <Col xs={10} sm={8} md={6} xsOffset={1} smOffset={2} mdOffset={3}>
+          <div className='fit-content center-block'>
             <Pagination
-              prev
-              next
-              first
-              last
-              ellipsis
-              boundaryLinks
+              prev next first last ellipsis boundaryLinks
               items={this.state.pagesCount}
               maxButtons={3}
               activePage={this.state.activePage}
-              onSelect={this.handleSelect} />
-          </Col>
+              onSelect={this.handlePageSelect.bind(this)} />
+          </div>
         </Row>
       </div>
     )
