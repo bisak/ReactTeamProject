@@ -18,6 +18,7 @@ import EditProductComponent from '../components/EditProductComponent'
 import LogoutComponent from '../components/LogoutComponent'
 import BoughtProductsComponent from '../components/BoughtProductsComponent'
 import RemovedProductsComponent from '../components/RemovedProductsComponent'
+import StatsComponent from '../components/StatsComponent'
 
 const Routes = () => (
   <Switch>
@@ -38,6 +39,7 @@ const Routes = () => (
     <PrivateRoute admin exact path='/admin/add-admin' component={AddAdminComponent} />
     <PrivateRoute admin exact path='/admin/all-admins' component={AllAdminsComponent} />
     <PrivateRoute admin exact path='/admin/ban-user' component={BanUserComponent} />
+    <PrivateRoute admin exact path='/admin/stats' component={StatsComponent} />
 
     <Route exact path='/not-found' component={NotFoundComponent} />
     <Route component={NotFoundComponent} />

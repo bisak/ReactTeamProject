@@ -30,7 +30,7 @@ class AddAdminComponent extends Component {
     return (
       <div>
         <div className='container remove-navbar-margin'>
-          <h3 className='text-center'>All admins</h3>
+          <h4 className='text-center'>All admins</h4>
           {users}
         </div>
       </div>

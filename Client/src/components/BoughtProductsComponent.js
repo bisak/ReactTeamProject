@@ -52,7 +52,7 @@ class BoughtProductsComponent extends Component {
     }
     return (
       <div className='container'>
-        <h3 className='text-center'>My purchases</h3>
+        <h4 className='text-center'>My purchases</h4>
         {products}
         <Row>
           <Col xs={10} sm={8} md={6} xsOffset={1} smOffset={2} mdOffset={3}>

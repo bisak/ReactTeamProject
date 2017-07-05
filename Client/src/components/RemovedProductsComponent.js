@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Pagination, Row, Col} from 'react-bootstrap'
+import {Pagination, Row} from 'react-bootstrap'
 import ListProductComponent from './sub-components/ListProductComponent'
 import alt from '../alt'
 import AllProductsStore from '../stores/AllProductsStore'
@@ -43,7 +43,7 @@ class RemovedProductsComponent extends Component {
     })
     return (
       <div className='container remove-navbar-margin'>
-        <h3 className='text-center'>Hidden products</h3>
+        <h4 className='text-center'>Hidden products</h4>
         {products}
         <Row>
           <div className='fit-content center-block'>

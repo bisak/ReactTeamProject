@@ -55,12 +55,12 @@ class FooterComponent extends Component {
             </Col>
             <Col md={4} >
               <h2><CountTo to={this.state.stats.allComponents} speed={1234} /></h2>
-              <p>React components for sale</p>
+              <p>Components for sale</p>
               {productsButton}
             </Col>
             <Col md={4} >
               <h2><CountTo to={this.state.stats.purchases} speed={1234} /></h2>
-              <p>Purchases</p>
+              <p>Total purchases</p>
               {loginButton}
             </Col>
           </Row>

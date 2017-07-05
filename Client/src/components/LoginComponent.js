@@ -30,7 +30,7 @@ class LoginComponent extends Component {
   render () {
     return (
       <div className='container'>
-        <Row><h3 className='text-center'>Login</h3></Row>
+        <Row><h4 className='text-center'>Login</h4></Row>
 
         <Row>
           <Col xs={10} sm={10} md={6} smOffset={1} xsOffset={1} mdOffset={3}>

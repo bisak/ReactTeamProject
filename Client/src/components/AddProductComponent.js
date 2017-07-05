@@ -31,7 +31,7 @@ class AddProductComponent extends Component {
   render () {
     return (
       <div className='container remove-navbar-margin'>
-        <Row><h3 className='text-center'>Add Product</h3></Row>
+        <Row><h4 className='text-center'>Add Product</h4></Row>
 
         <Row>
           <Col xs={10} sm={10} md={6} smOffset={1} xsOffset={1} mdOffset={3}>

@@ -28,11 +28,9 @@ class BanUserComponent extends Component {
       return (<ListUserComponent onBanUser={UsersActions.banUser} banUser key={user._id} user={user} />)
     })
     return (
-      <div>
-        <div className='container remove-navbar-margin'>
-          <h3 className='text-center'>Ban users</h3>
-          {users}
-        </div>
+      <div className='container remove-navbar-margin'>
+        <h4 className='text-center'>Ban users</h4>
+        {users}
       </div>
     )
   }

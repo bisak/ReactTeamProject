@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Navbar, NavDropdown, Nav } from 'react-bootstrap'
+import { Navbar, NavDropdown, Nav, MenuItem } from 'react-bootstrap'
 import ListItemLink from './sub-components/ListItemLink'
 import Auth from '../Auth'
 
@@ -16,9 +16,12 @@ class NavbarComponent extends Component {
         <NavDropdown title='Admin' id='basic-nav-dropdown'>
           <ListItemLink to='/admin/add-product'>Add Product</ListItemLink>
           <ListItemLink to='/products/deleted'>Hidden Products</ListItemLink>
+          <MenuItem divider />
           <ListItemLink to='/admin/add-admin'>Add Admin</ListItemLink>
           <ListItemLink to='/admin/all-admins'>All Admins</ListItemLink>
           <ListItemLink to='/admin/ban-user'>Ban User</ListItemLink>
+          <MenuItem divider />
+          <ListItemLink to='/admin/stats'>Statistics</ListItemLink>
         </NavDropdown>)
     }
     if (Auth.isUserAuthenticated()) {

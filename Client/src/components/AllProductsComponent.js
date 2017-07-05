@@ -60,7 +60,7 @@ class AllProductsComponent extends Component {
 
     return (
       <div className='container remove-navbar-margin'>
-        <h3 className='text-center'>Our products</h3>
+        <h4 className='text-center'>Our products</h4>
         <Row>
           <Col className='center-block fit-content'>
             <SearchForm search={this.state.search} onSearch={this.handleSearch.bind(this)} onInput={AllProductsActions.inputChange} />

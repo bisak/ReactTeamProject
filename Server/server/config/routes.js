@@ -3,7 +3,6 @@ const auth = require('./auth')()
 const router = require('express').Router()
 const path = require('path')
 const randomId = require('random-id')
-
 const multer = require('multer')
 
 const storage = multer.diskStorage({
@@ -14,6 +13,7 @@ const storage = multer.diskStorage({
     cb(null, randomId() + path.extname(file.originalname))
   }
 })
+
 const uploader = multer({
   storage: storage,
   fileFilter: function (req, file, cb) {

@@ -33,7 +33,7 @@ class RegsiterComponent extends Component {
       <div className='container'>
         { this.state.redirectTo ? <Redirect to={{ pathname: this.state.redirectTo }} /> : (
           <div>
-            <Row><h3 className='text-center'>Register</h3></Row>
+            <Row><h4 className='text-center'>Register</h4></Row>
 
             <Row>
               <Col xs={10} sm={10} md={6} smOffset={1} xsOffset={1} mdOffset={3}>
