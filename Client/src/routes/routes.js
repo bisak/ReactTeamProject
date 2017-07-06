@@ -6,7 +6,7 @@ import PrivateRoute from './PrivateRoute'
 import HomeComponent from '../components/HomeComponent'
 import NotFoundComponent from '../components/NotFoundComponent'
 import AllProductsComponent from '../components/AllProductsComponent'
-import ProfileComponnet from '../components/ProfileComponent'
+import ProfileComponent from '../components/ProfileComponent'
 import AddProductComponent from '../components/AddProductComponent'
 import SingleProductComponent from '../components/SingleProductComponent'
 import LoginComponent from '../components/LoginComponent'
@@ -28,7 +28,7 @@ const Routes = () => (
     <Route exact path='/register' component={RegisterComponent} />
     <Route exact path='/products' component={AllProductsComponent} />
     <Route exact path='/product/:id' component={SingleProductComponent} />
-    <Route exact path='/profile/:username' component={ProfileComponnet} />
+    <Route exact path='/profile/:username' component={ProfileComponent} />
 
     <PrivateRoute exact path='/products/bought' component={BoughtProductsComponent} />
 
