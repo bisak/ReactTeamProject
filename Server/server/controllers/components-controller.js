@@ -23,7 +23,7 @@ module.exports.getComponentById = (req, res) => {
   })
 }
 module.exports.getComponents = (req, res) => {
-  let pageSize = 10
+  let pageSize = 5
   let page = Number(req.query.page) || 1
   let search = req.query.search
 
@@ -51,7 +51,7 @@ module.exports.getComponents = (req, res) => {
     .then(resolutions => {
       let objToReturn = {}
       objToReturn.products = resolutions[0]
-      objToReturn.pagesCount = Math.ceil(resolutions[1] / 10)
+      objToReturn.pagesCount = Math.ceil(resolutions[1] / 5)
       return res.status(200).json({ success: true, data: objToReturn })
     })
     .catch(error => {
@@ -62,7 +62,7 @@ module.exports.getComponents = (req, res) => {
 
 module.exports.getBoughtComponents = (req, res) => {
   let username = req.user.username
-  let pageSize = 10
+  let pageSize = 5
   let page = Number(req.query.page) || 1
   let search = req.query.search
 
@@ -90,7 +90,7 @@ module.exports.getBoughtComponents = (req, res) => {
     .then(resolutions => {
       let objToReturn = {}
       objToReturn.products = resolutions[0]
-      objToReturn.pagesCount = Math.ceil(resolutions[1] / 10)
+      objToReturn.pagesCount = Math.ceil(resolutions[1] / 5)
       return res.status(200).json({ success: true, data: objToReturn })
     })
     .catch(error => {
@@ -100,7 +100,7 @@ module.exports.getBoughtComponents = (req, res) => {
 }
 
 module.exports.getDeletedComponents = (req, res) => {
-  let pageSize = 10
+  let pageSize = 5
   let page = Number(req.query.page) || 1
   let search = req.query.search
 
@@ -128,7 +128,7 @@ module.exports.getDeletedComponents = (req, res) => {
     .then(resolutions => {
       let objToReturn = {}
       objToReturn.products = resolutions[0]
-      objToReturn.pagesCount = Math.ceil(resolutions[1] / 10)
+      objToReturn.pagesCount = Math.ceil(resolutions[1] / 5)
       return res.status(200).json({ success: true, data: objToReturn })
     })
     .catch(error => {

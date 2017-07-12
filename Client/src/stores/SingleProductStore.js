@@ -46,7 +46,6 @@ class SingleProductStore {
   onAddReviewSuccess (data) {
     this.product.reviews.unshift(data.data)
     this.review = ''
-    console.log(this.product)
   }
 
   onAddReviewError (data) {
@@ -79,7 +78,6 @@ class SingleProductStore {
     this.product.isVisible = false
     toastr.options.positionClass = 'toast-bottom-right'
     toastr.success('Sucessfully deleted product.')
-    console.log(response)
   }
 
   onDeleteError (error) {
@@ -90,7 +88,6 @@ class SingleProductStore {
     this.product.isVisible = true
     toastr.options.positionClass = 'toast-bottom-right'
     toastr.success('Sucessfully Undeleted product.')
-    console.log(response)
   }
 
   onUnDeleteError (error) {

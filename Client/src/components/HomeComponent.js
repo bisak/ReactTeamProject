@@ -41,7 +41,7 @@ class FooterComponent extends Component {
         <Jumbotron>
           <div className='container'>
             <h1>Welcome to Reactive Store.</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur error placeat ipsam, enim cum dolorum ipsum laudantium id dicta doloribus veniam non sequi, recusandae minus. Aspernatur, iure! In, inventore, assumenda!</p>
+            <p><strong>Reactive Store</strong> is a shop for quality React components. Log in or Register to buy our products.</p>
             <p><Link className='btn btn-primary btn-lg' to={'/products'} role='button'>Our products.</Link></p>
           </div>
         </Jumbotron>

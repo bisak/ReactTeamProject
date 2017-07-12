@@ -40,6 +40,7 @@ class LoginComponent extends Component {
                 <Col componentClass={ControlLabel} sm={1}><Glyphicon glyph='user' /></Col>
                 <Col sm={10}>
                   <FormControl
+                    required
                     value={this.state.user.username}
                     type='text'
                     name='username'
@@ -51,6 +52,7 @@ class LoginComponent extends Component {
                 <Col componentClass={ControlLabel} sm={1}><Glyphicon glyph='text-color' /></Col>
                 <Col sm={10}>
                   <FormControl
+                    required
                     value={this.state.user.password}
                     type='password'
                     name='password'

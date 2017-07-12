@@ -20,13 +20,17 @@ class LoginStore {
   }
 
   onLoginSuccess (response) {
+    alt.recycle(this)
     history.push('/products')
     toastr.options.positionClass = 'toast-bottom-right'
     toastr.success('Welcome', 'Logged in.')
   }
 
-  onLoginError () {
-
+  onLoginError (error) {
+    if (error.response.status === 400) {
+      toastr.options.positionClass = 'toast-bottom-right'
+      return toastr.warning('Error', 'Wrong password or user doesn\'t exist')
+    }
   }
 }
 

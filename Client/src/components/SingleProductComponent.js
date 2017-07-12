@@ -65,7 +65,7 @@ class SingleProductComponent extends Component {
     let editBtn
 
     if (!reviews.length) {
-      noReviewsMessage = <h5 className='text-center'>No reviews for this component. Add the first one.</h5>
+      noReviewsMessage = <h5 className='text-center'>No reviews available for this component.</h5>
     }
 
     if (Auth.isUserAuthenticated()) {

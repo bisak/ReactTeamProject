@@ -30,8 +30,13 @@ class RegisterStore {
     toastr.success('You can log in now.', 'Registered')
   }
 
-  onRegisterError (response) {
-    console.log(response)
+  onRegisterError (error) {
+    if (error.response.status === 409) {
+      toastr.options.positionClass = 'toast-bottom-right'
+      return toastr.warning('Error', 'This user already exists.')
+    }
+    toastr.options.positionClass = 'toast-bottom-right'
+    return toastr.warning('An error occured.')
   }
 }
 

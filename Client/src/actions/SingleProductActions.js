@@ -57,6 +57,7 @@ class SingleProductActions {
       file: `${config.baseUrl}/component/${id}/source`
     }
     window.open(response.file)
+    return true
   }
 
   deleteProduct (id) {

@@ -43,7 +43,7 @@ class StatsComponent extends Component {
         scales: {
           yAxes: [{
             ticks: {
-              stepSize: 4,
+              stepSize: 3,
               beginAtZero: true
             }
           }]
@@ -70,7 +70,7 @@ class StatsComponent extends Component {
         scales: {
           yAxes: [{
             ticks: {
-              stepSize: 4,
+              stepSize: 3,
               beginAtZero: true
             }
           }]
@@ -97,7 +97,7 @@ class StatsComponent extends Component {
         scales: {
           yAxes: [{
             ticks: {
-              stepSize: 4,
+              stepSize: 3,
               beginAtZero: true
             }
           }]
@@ -110,6 +110,7 @@ class StatsComponent extends Component {
     return (
       <div className='container'>
         <h4 className='text-center'>Site usage statistics</h4>
+        <hr />
         <hr className='no-margin no-padding' />
         <Row className='z-depth-1'>
           <h4 className='text-center'>Users</h4>

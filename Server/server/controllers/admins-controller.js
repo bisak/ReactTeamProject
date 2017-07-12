@@ -43,7 +43,7 @@ module.exports.addAdmin = (req, res) => {
   let newAdmin = req.params.username
 
   User.findOneAndUpdate({ username: newAdmin }, { $addToSet: { roles: 'admin' } }).then((data) => {
-    return res.status(200).json({ success: true, data})
+    return res.status(200).json({ success: true, data })
   }).catch((err) => {
     console.log(err)
     return res.status(500).json({ success: false, msg: 'Cannot add admin' })
@@ -53,7 +53,7 @@ module.exports.removeAdmin = (req, res) => {
   let newAdmin = req.params.username
 
   User.findOneAndUpdate({ username: newAdmin }, { $pull: { roles: 'admin' } }).then((data) => {
-    return res.status(200).json({ success: true, data})
+    return res.status(200).json({ success: true, data })
   }).catch((err) => {
     console.log(err)
     return res.status(500).json({ success: false, msg: 'Cannot remove admin' })
@@ -69,7 +69,7 @@ module.exports.banUser = (req, res) => {
   let newAdmin = req.params.username
 
   User.findOneAndUpdate({ username: newAdmin }, { banned: true }).then((data) => {
-    return res.status(200).json({ success: true, data})
+    return res.status(200).json({ success: true, data })
   }).catch((err) => {
     console.log(err)
     return res.status(500).json({ success: false, msg: 'User banned' })
@@ -89,20 +89,22 @@ module.exports.unbanUser = (req, res) => {
 
 module.exports.getFullStats = (req, res) => {
   Statistic.find().sort('createdAt').then((statistics) => {
-    let density = Math.round(statistics.length * 0.025)
+    let density = Math.round(statistics.length * 0.2)
     let statsToReturn = statistics.filter((stat, index) => (index % density === 0 || index === statistics.length - 1) && stat)
     let usersCount = statsToReturn.map(stat => stat.usersCount)
     let purchasesCount = statsToReturn.map(stat => stat.purchasesCount)
     let componentsCount = statsToReturn.map(stat => stat.componentsCount)
     let times = statsToReturn.map(stat => new Date().toLocaleString(new Date(stat.createdAt)))
-    console.log('success')
-    return res.status(200).json({ success: true,
-      data: {
-        usersCount,
-        purchasesCount,
-        componentsCount,
-        times
-      }
+    const dataToReturn = {
+      usersCount,
+      purchasesCount,
+      componentsCount,
+      times
+    }
+    console.log(dataToReturn)
+    return res.status(200).json({
+      success: true,
+      data: dataToReturn
     })
   }).catch(error => {
     console.log(error)

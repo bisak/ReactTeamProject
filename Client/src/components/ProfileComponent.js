@@ -53,7 +53,7 @@ class ProfileComponent extends Component {
         <hr className='no-margin no-padding' />
         <Row className='bottom-profile-section'>
           <Col className='z-depth-1' xs={10} xsOffset={1}>
-            <h4 className='text-center'>Reviews</h4>
+            <h4 className='text-center'>Reviews from {this.state.user.username}</h4>
             <hr />
             {reviews}
             {noReviewsMessage}
