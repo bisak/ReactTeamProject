@@ -25,7 +25,7 @@ class SingleProductStore {
 
   onGetSingleProductSuccess (response) {
     let productData = response.data
-    this.product = {...productData}
+    this.product = { ...productData }
     this.product.postedAgo = moment(productData.createdAt).fromNow()
   }
 
@@ -37,7 +37,7 @@ class SingleProductStore {
   }
 
   onInputChange (event) {
-    const {target} = event
+    const { target } = event
     const fieldName = target.name
     let value = target.value
     this[fieldName] = value
@@ -48,10 +48,13 @@ class SingleProductStore {
     this.review = ''
   }
 
-  onAddReviewError (data) {
-    if (data.response.status === 401) {
+  onAddReviewError (error) {
+    if (error.response.status === 401) {
       toastr.options.positionClass = 'toast-bottom-right'
       toastr.warning('Log in to post a review.')
+    } else if (error.response.status === 400) {
+      toastr.options.positionClass = 'toast-bottom-right'
+      toastr.error('You have been banned.')
     }
   }
 

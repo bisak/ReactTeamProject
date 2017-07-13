@@ -20,21 +20,18 @@ class UsersStore {
     this.users = this.users.filter(user => user._id !== response.data._id)
     toastr.options.positionClass = 'toast-bottom-right'
     toastr.success(`${response.data.username} is now banned.`)
-    console.log(response)
   }
 
   onAddAdminSuccess (response) {
     this.users = this.users.filter(user => user._id !== response.data._id)
     toastr.options.positionClass = 'toast-bottom-right'
     toastr.success(`${response.data.username} is now an admin.`)
-    console.log(response)
   }
 
   onRemoveAdminSuccess (response) {
     this.users = this.users.filter(user => user._id !== response.data._id)
     toastr.options.positionClass = 'toast-bottom-right'
     toastr.success(`${response.data.username} is no longer an admin.`)
-    console.log(response)
   }
 
   onBanUserError (error) {

@@ -94,14 +94,14 @@ module.exports.getFullStats = (req, res) => {
     let usersCount = statsToReturn.map(stat => stat.usersCount)
     let purchasesCount = statsToReturn.map(stat => stat.purchasesCount)
     let componentsCount = statsToReturn.map(stat => stat.componentsCount)
-    let times = statsToReturn.map(stat => new Date().toLocaleString(new Date(stat.createdAt)))
+    console.log(statsToReturn)
+    let times = statsToReturn.map(stat => new Date(stat.createdAt).toLocaleString())
     const dataToReturn = {
       usersCount,
       purchasesCount,
       componentsCount,
       times
     }
-    console.log(dataToReturn)
     return res.status(200).json({
       success: true,
       data: dataToReturn

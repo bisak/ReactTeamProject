@@ -25,7 +25,8 @@ class BanUserComponent extends Component {
 
   render () {
     let users = this.state.users.map(user => {
-      return (<ListUserComponent onBanUser={UsersActions.banUser} banUser key={user._id} user={user} />)
+      if (!user.banned)
+        return (<ListUserComponent onBanUser={UsersActions.banUser} banUser key={user._id} user={user} />)
     })
     return (
       <div className='container remove-navbar-margin'>
